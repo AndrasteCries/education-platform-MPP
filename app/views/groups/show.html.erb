@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-3">
+  <p class="text-success"><%= notice %></p>
 
-<%= render @group %>
+  <%= render @group %>
 
-<div>
-  <%= link_to "Edit this group", edit_group_path(@group) %> |
-  <%= link_to "Back to groups", groups_path %>
-
-  <%= button_to "Destroy this group", @group, method: :delete %>
+  <div class="btn-group mt-2" role="group" aria-label="Group actions">
+    <%= link_to "Edit this group", edit_group_path(@group), class: "btn btn-primary m-2 rounded" %> 
+    <%= link_to "Back to groups", groups_path, class: "btn btn-secondary m-2 rounded" %> 
+    <%= button_to "Destroy this group", @group, method: :delete, class: "btn btn-danger m-2 rounded" %>
+  </div>
+  
 </div>

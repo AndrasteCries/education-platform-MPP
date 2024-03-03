@@ -1,10 +1,10 @@
-<h1>Editing group</h1>
+<div class="d-flex flex-column align-items-center">
+  <h1>Editing group</h1>
 
-<%= render "form", group: @group %>
+  <%= render "form", group: @group %>
 
-<br>
-
-<div>
-  <%= link_to "Show this group", @group %> |
-  <%= link_to "Back to groups", groups_path %>
+  <div>
+    <%= link_to "Show this group", @group, class: "btn btn-primary m-2 rounded" %> |
+    <%= link_to "Back to groups", groups_path, class: "btn btn-secondary m-2 rounded" %>
+  </div>
 </div>

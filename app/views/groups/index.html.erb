@@ -1,14 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex flex-column align-items-center">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Groups</h1>
+  <h1>Groups</h1>
 
-<div id="groups">
-  <% @groups.each do |group| %>
-    <%= render group %>
-    <p>
-      <%= link_to "Show this group", group %>
-    </p>
-  <% end %>
+  <div id="groups" class="row row-cols-1 row-cols-md-3 g-1">
+    <% @groups.each do |group| %>
+      <div class="col mb-2">
+        <div class="card" style="width: 18rem;" id="<%= dom_id group %>">
+          <div class="card-body">
+            <%= render group %>
+            <p>
+              <%= link_to "Show this group", group, class: "btn btn-primary" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to "New group", new_group_path, class: "btn btn-secondary" %>
 </div>
-
-<%= link_to "New group", new_group_path %>
