@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  subject_id: 1
+  notes: MyText
+  date: 2024-03-03
+  teacher_id: 1
+
+two:
+  title: MyText
+  subject_id: 1
+  notes: MyText
+  date: 2024-03-03
+  teacher_id: 1
