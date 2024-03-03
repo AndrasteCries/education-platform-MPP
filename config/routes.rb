@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :subject_teachers
+  resources :groups
+  resources :teachers
+  resources :subjects
   resources :students
   resources :marks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

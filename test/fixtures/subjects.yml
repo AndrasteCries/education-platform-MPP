@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject_id: 1
+  title: MyText
+  description: MyText
+  hours: 1
+  difficulty_level: MyText
+  lessons_id: 1
+
+two:
+  subject_id: 1
+  title: MyText
+  description: MyText
+  hours: 1
+  difficulty_level: MyText
+  lessons_id: 1

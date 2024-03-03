@@ -1,0 +1,2 @@
+class SubjectTeacher < ApplicationRecord
+end
