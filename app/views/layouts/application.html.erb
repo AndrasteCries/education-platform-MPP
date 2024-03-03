@@ -6,11 +6,35 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "content", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg bg-dark">
+      <div class="container-fluid text-light">
+        <a class="navbar-brand text-light" href="#">OurNavBar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <%= link_to 'Home', root_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Groups', groups_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Subjects', subjects_path, class: 'nav-link text-light' %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="d-flex justify-content-center container my-5 align-items-center rounded-3 border shadow-lg p-4" >
+      <%= yield %>
+    </div>
+    
   </body>
 </html>
