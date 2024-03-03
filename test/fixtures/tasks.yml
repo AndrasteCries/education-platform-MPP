@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  lesson_id: 1
+  notes: MyText
+  deadline: 2024-03-03
+  material: MyText
+  max_mark: 1
+
+two:
+  title: MyText
+  lesson_id: 1
+  notes: MyText
+  deadline: 2024-03-03
+  material: MyText
+  max_mark: 1

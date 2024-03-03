@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :lessons
+  resources :tasks
   resources :students
   resources :marks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
