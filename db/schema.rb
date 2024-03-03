@@ -21,6 +21,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_203209) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lessons", force: :cascade do |t|
+    t.text "title"
+    t.integer "subject_id"
+    t.text "notes"
+    t.date "date"
+    t.integer "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "marks", force: :cascade do |t|
     t.integer "student_id"
     t.integer "task_id"
@@ -56,6 +66,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_203209) do
     t.integer "hours"
     t.text "difficulty_level"
     t.integer "lessons_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "title"
+    t.integer "lesson_id"
+    t.text "notes"
+    t.date "deadline"
+    t.text "material"
+    t.integer "max_mark"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
