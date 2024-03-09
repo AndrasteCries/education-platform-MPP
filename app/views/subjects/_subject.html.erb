@@ -1,32 +1,14 @@
-<div id="<%= dom_id subject %>">
-  <p>
-    <strong>Subject:</strong>
-    <%= subject.subject_id %>
-  </p>
+<p>
+  <strong class="card-title">Subject id:</strong>
+  <%= subject.id %>
+</p>
 
-  <p>
-    <strong>Title:</strong>
-    <%= subject.title %>
-  </p>
+<p>
+  <strong class="card-text">Name:</strong>
+  <%= subject.title %>
+</p>
+<p>
+  <strong class="card-text">Hours count:</strong>
+  <%= subject.hours %>
+</p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= subject.description %>
-  </p>
-
-  <p>
-    <strong>Hours:</strong>
-    <%= subject.hours %>
-  </p>
-
-  <p>
-    <strong>Difficulty level:</strong>
-    <%= subject.difficulty_level %>
-  </p>
-
-  <p>
-    <strong>Lessons:</strong>
-    <%= subject.lessons_id %>
-  </p>
-
-</div>

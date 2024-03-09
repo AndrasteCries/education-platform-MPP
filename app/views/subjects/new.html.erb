@@ -1,9 +1,8 @@
-<h1>New subject</h1>
+<div class="d-flex flex-column align-items-center">
+  <p style="color: green"><%= notice %></p>
 
-<%= render "form", subject: @subject %>
+  <h1>New subject</h1>
 
-<br>
-
-<div>
-  <%= link_to "Back to subjects", subjects_path %>
+  <%= render "form", subject: @subject %>
+  <%= link_to "Back to subjects", subjects_path, class: "btn btn-secondary mt-3" %>
 </div>

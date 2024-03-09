@@ -1,7 +1,7 @@
 <%= form_with(model: subject) do |form| %>
   <% if subject.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+      <h2><%= pluralize(subject.errors.count, "error") %> prohibited this group from being saved:</h2>
 
       <ul>
         <% subject.errors.each do |error| %>
@@ -11,37 +11,22 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :subject_id, style: "display: block" %>
-    <%= form.number_field :subject_id %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label"  %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :hours, class: "form-label" %>
+    <%= form.number_field :hours, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label"  %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_area :title %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :hours, style: "display: block" %>
-    <%= form.number_field :hours %>
-  </div>
-
-  <div>
-    <%= form.label :difficulty_level, style: "display: block" %>
-    <%= form.text_area :difficulty_level %>
-  </div>
-
-  <div>
-    <%= form.label :lessons_id, style: "display: block" %>
-    <%= form.number_field :lessons_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

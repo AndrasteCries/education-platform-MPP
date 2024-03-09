@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-3">
+  <p class="text-success"><%= notice %></p>
 
-<%= render @subject %>
+  <%= render @subject %>
 
-<div>
-  <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
-  <%= link_to "Back to subjects", subjects_path %>
-
-  <%= button_to "Destroy this subject", @subject, method: :delete %>
+  <div class="btn-group mt-2" role="group" aria-label="Group actions">
+    <%= link_to "Edit this subject", edit_subject_path(@subject), class: "btn btn-primary m-2 rounded" %> 
+    <%= link_to "Back to subjects", subjects_path, class: "btn btn-secondary m-2 rounded" %> 
+    <%= button_to "Destroy this subject", @subject, method: :delete, class: "btn btn-danger m-2 rounded" %>
+  </div>
+  
 </div>

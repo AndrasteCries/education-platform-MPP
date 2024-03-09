@@ -1,10 +1,10 @@
-<h1>Editing subject</h1>
+<div class="d-flex flex-column align-items-center">
+  <h1>Editing subject</h1>
 
-<%= render "form", subject: @subject %>
+  <%= render "form", subject: @subject %>
 
-<br>
-
-<div>
-  <%= link_to "Show this subject", @subject %> |
-  <%= link_to "Back to subjects", subjects_path %>
+  <div>
+    <%= link_to "Show this subject", @subject, class: "btn btn-primary m-2 rounded" %> |
+    <%= link_to "Back to subjects", subjects_path, class: "btn btn-secondary m-2 rounded" %>
+  </div>
 </div>

@@ -1,14 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex flex-column align-items-center">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Subjects</h1>
+  <h1>Subjects</h1>
 
-<div id="subjects">
-  <% @subjects.each do |subject| %>
-    <%= render subject %>
-    <p>
-      <%= link_to "Show this subject", subject %>
-    </p>
-  <% end %>
+  <div id="subject" class="row row-cols-1 row-cols-md-3 g-1">
+    <% @subjects.each do |subject| %>
+      <div class="col mb-2">
+        <div class="card" style="width: 18rem;" id="<%= dom_id subject %>">
+          <div class="card-body">
+            <%= render subject %>
+            <p>
+              <%= link_to "Show this subject", subject, class: "btn btn-primary" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to "New subject", new_subject_path, class: "btn btn-secondary" %>
 </div>
-
-<%= link_to "New subject", new_subject_path %>
