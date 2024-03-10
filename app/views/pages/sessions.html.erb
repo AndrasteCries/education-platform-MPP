@@ -12,47 +12,52 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h2 class="text-uppercase text-center mb-5">Create an student account</h2>
-                <form>
+                <h2 class="text-uppercase text-center mb-5">Sign up</h2>
+
+                <%= form_for(resource, as: resource_name, url: teacher_registration_path(resource_name)) do |f| %>
+                  <%= render "devise/shared/error_messages", resource: resource %>
+
                   <div class="form-outline mb-4">
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Your First Name" />
-                    <label class="form-label" for="form3Example1cg">Your First Name</label>
-                  </div>
-                  <div class="form-outline mb-4">
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Your Middle Name" />
-                    <label class="form-label" for="form3Example1cg">Your Middle Name</label>
-                  </div>
-                  <div class="form-outline mb-4">
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Your Last Name" />
-                    <label class="form-label" for="form3Example1cg">Your Last Name</label>
-                  </div>
-                  <div class="form-outline mb-4">
-                    <input type="email" id="form3Example2cg" class="form-control form-control-lg" placeholder="Your Email" />
-                    <label class="form-label" for="form3Example2cg">Your Email</label>
-                  </div>
-                  <div class="form-outline mb-4">
-                    <input type="password" id="form3Example5cg" class="form-control form-control-lg" placeholder="Password" />
-                    <label class="form-label" for="form3Example5cg">Password</label>
-                  </div>
-                  <div class="form-outline mb-4">
-                    <input type="password" id="form3Example6cdg" class="form-control form-control-lg" placeholder="Repeat your password" />
-                    <label class="form-label" for="form3Example6cdg">Repeat your password</label>
-                  </div>
-                  <div class="form-outline mb-4">
-                    <input type="password" id="form3Example6cdg" class="form-control form-control-lg" placeholder="Your Phone" />
-                    <label class="form-label" for="form3Example6cdg">Your Phone</label>
+                    <%= f.label :first_name, class: "form-label" %>
+                    <%= f.text_field :first_name, class: "form-control form-control-lg", placeholder: "Your First Name" %>
                   </div>
 
+                  <div class="form-outline mb-4">
+                    <%= f.label :middle_name, class: "form-label" %>
+                    <%= f.text_field :middle_name, class: "form-control form-control-lg", placeholder: "Your Middle Name" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= f.label :last_name, class: "form-label" %>
+                    <%= f.text_field :last_name, class: "form-control form-control-lg", placeholder: "Your Last Name" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= f.label :email, class: "form-label" %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", placeholder: "Your Email" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= f.label :password, class: "form-label" %>
+                    <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %>
+                    <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg", placeholder: "Your Password" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= f.label :password_confirmation, class: "form-label" %>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg", placeholder: "Repeat Your Password" %>
+                  </div>
 
                   <div class="d-flex justify-content-center">
-                    <button type="button"
-                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                    <%= f.submit "Sign up", class: "btn btn-success btn-block btn-lg gradient-custom-4 text-body" %>
                   </div>
+                <% end %>
 
-                  <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
-                                                                                          class="fw-bold text-body"><u>Login here</u></a></p>
-
-                </form>
+                <p class="text-center text-muted mt-5 mb-0">Have already an account?
+                  <%= link_to "Login here", new_teacher_session_path, class:"fw-bold text-body" %>
+                </p>
 
               </div>
             </div>
@@ -60,6 +65,7 @@
         </div>
       </div>
     </div>
+
   </div>
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="1">
     <div class="container h-100">
@@ -68,43 +74,50 @@
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-              <form>
+              <%= form_for(resource, as: resource_name, url: new_student_registration_path(resource_name)) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
+
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Your Name</label>
+                  <%= f.label :first_name, class: "form-label" %>
+                  <%= f.text_field :first_name, class: "form-control form-control-lg", placeholder: "Your First Name" %>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                  <%= f.label :middle_name, class: "form-label" %>
+                  <%= f.text_field :middle_name, class: "form-control form-control-lg", placeholder: "Your Middle Name" %>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <%= f.label :last_name, class: "form-label" %>
+                  <%= f.text_field :last_name, class: "form-control form-control-lg", placeholder: "Your Last Name" %>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                  <%= f.label :email, class: "form-label" %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", placeholder: "Your Email" %>
                 </div>
 
-                <div class="form-check d-flex justify-content-center mb-5">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label" for="form2Example3g">
-                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                  </label>
+                <div class="form-outline mb-4">
+                  <%= f.label :password, class: "form-label" %>
+                  <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %>
+                  <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg", placeholder: "Your Password" %>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <%= f.label :password_confirmation, class: "form-label" %>
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg", placeholder: "Repeat Your Password" %>
                 </div>
 
                 <div class="d-flex justify-content-center">
-                  <button type="button"
-                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                  <%= f.submit "Sign up", class: "btn btn-success btn-block btn-lg gradient-custom-4 text-body" %>
                 </div>
+              <% end %>
 
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
-                                                                                        class="fw-bold text-body"><u>Login here</u></a></p>
-
-              </form>
+              <p class="text-center text-muted mt-5 mb-0">Have already an account?
+                <%= link_to "Login here", new_teacher_session_path, class:"fw-bold text-body" %>
+              </p>
 
             </div>
           </div>

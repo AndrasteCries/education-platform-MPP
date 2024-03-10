@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :students
-  devise_for :teachers
+  devise_for :students, path: 'students', controllers: { sessions: "students/sessions",
+                                                         registrations: "students/registrations" }
+  devise_for :teachers, path: 'teachers', controllers: { sessions: "teachers/sessions",
+                                                         registrations: "teachers/registrations" }
+
   root 'application#welcome'
   resources :subject_teachers
   resources :groups

@@ -1,5 +1,41 @@
 <div class="d-flex flex-column align-items-center">
-    <h1>Hello rails</h1>
+  <h1>Hello rails</h1>
 
-    <p> Yana, Vladislav and Oleksandr</p>
+  <p> Yana, Vladislav and Oleksandr</p>
+
+  <h2> Teachers </h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.id %></td>
+        <td><%= teacher.email %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <h2> Students </h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.id %></td>
+        <td><%= student.email %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>

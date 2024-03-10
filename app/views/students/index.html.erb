@@ -3,12 +3,26 @@
 <h1>Students</h1>
 
 <div id="students">
-  <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
-  <% end %>
+  <h2>Students</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Email</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.id %></td>
+        <td><%= student.email %></td>
+        <td>
+          <%= link_to "Show", student, class: "btn btn-info btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
-
 <%= link_to "New student", new_student_path %>

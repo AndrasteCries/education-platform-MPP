@@ -21,17 +21,18 @@ class TeachersController < ApplicationController
 
   # POST /teachers or /teachers.json
   def create
-    @teacher = Teacher.new(teacher_params)
+    @teacher = Teacher.new(student_params)
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to teacher_url(@teacher), notice: "Teacher was successfully created." }
+        format.html { redirect_to student_url(@teacher), notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /teachers/1 or /teachers/1.json
@@ -59,12 +60,16 @@ class TeachersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_teacher
+  def set_teacher
+    if params[:id] == 'sign_out'
+      @teacher = Teacher.find(1)
+    else
       @teacher = Teacher.find(params[:id])
     end
+  end
 
     # Only allow a list of trusted parameters through.
     def teacher_params
-      params.require(:teacher).permit(:teacher_id, :first_name, :middle_name, :last_name, :phone_number, :email, :degree)
+      params.require(:teacher).permit(:teacher_id, :first_name, :middle_name, :last_name, :email, :password, :password_confirmation)
     end
 end
