@@ -42,19 +42,42 @@
         </li>
       <% else %>
         <li class="nav-item mx-3">
-          <%= link_to "Student sign up", new_student_registration_path, class: 'nav-link text-light' %>
+          <%= link_to "Sign up", "#", style: "white-space: nowrap;", class: "nav-link text-light", "data-bs-toggle": "modal", "data-bs-target": "#sign_up_modal" %>
         </li>
         <li class="nav-item mx-3">
-          <%= link_to "Student sign in", new_student_session_path, class: 'nav-link text-light' %>
-        </li>
-        <li class="nav-item mx-3">
-          <%= link_to "Teacher sign up", new_teacher_registration_path, class: 'nav-link text-light' %>
-        </li>
-        <li class="nav-item mx-3">
-          <%= link_to "Teacher sign in", new_teacher_session_path, class: 'nav-link text-light' %>
+          <%= link_to "Sign in", "#", style: "white-space: nowrap;", class: "nav-link text-light", "data-bs-toggle": "modal", "data-bs-target": "#sign_in_modal" %>
         </li>
       <% end %>
     </nav>
+    <div class="modal fade" id="sign_up_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Sign in</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <%= link_to "Student sign up", new_student_registration_path, class: 'btn btn-secondary' %>
+            <%= link_to "Teacher sign up", new_teacher_registration_path, class: 'btn btn-secondary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="sign_in_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Sign in</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <%= link_to "Student sign up", new_student_session_path, class: 'btn btn-secondary' %>
+            <%= link_to "Teacher sign in", new_teacher_session_path, class: 'btn btn-secondary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="flex justify-content-center container my-5 align-items-center rounded-3 border shadow-lg p-4" >
       <%= yield %>
     </div>
