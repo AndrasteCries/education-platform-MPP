@@ -3,10 +3,25 @@
 
   <%= render @group %>
 
-  <div class="btn-group mt-2" role="group" aria-label="Group actions">
-    <%= link_to "Edit this group", edit_group_path(@group), class: "btn btn-primary m-2 rounded" %> 
-    <%= link_to "Back to groups", groups_path, class: "btn btn-secondary m-2 rounded" %> 
-    <%= button_to "Destroy this group", @group, method: :delete, class: "btn btn-danger m-2 rounded" %>
-  </div>
-  
+  <% if @group.students.any? %>
+    <h2>Students:</h2>
+    <ul>
+      <% @group.students.each do |student| %>
+        <li><%= student.first_name %>  <%= student.middle_name %> <%= student.last_name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No students in this group.</p>
+  <% end %>
+
+  <% if teacher_signed_in? %>
+    <div class="btn-group mt-2" role="group" aria-label="Group actions">
+      <%= link_to "Edit this group", edit_group_path(@group), class: "btn btn-primary m-2 rounded" %>
+      <%= link_to "Back to groups", groups_path, class: "btn btn-secondary m-2 rounded" %>
+      <%= link_to "Add student", add_students_group_path(@group), class: "btn btn-secondary m-2 rounded" %>
+      <%= link_to "Remove student", remove_students_group_path(@group), class: "btn btn-secondary m-2 rounded" %>
+      <%= button_to "Destroy this group", @group, method: :delete, class: "btn btn-danger m-2 rounded" %>
+    </div>
+  <% end %>
+
 </div>

@@ -17,5 +17,7 @@
       </div>
     <% end %>
   </div>
-  <%= link_to "New subject", new_subject_path, class: "btn btn-secondary" %>
+  <% if teacher_signed_in? %>
+    <%= link_to "New subject", new_subject_path, class: "btn btn-secondary" %>
+  <% end %>
 </div>

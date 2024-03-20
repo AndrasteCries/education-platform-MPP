@@ -34,6 +34,38 @@ class GroupsController < ApplicationController
     end
   end
 
+  def add_students
+    @group = Group.find(params[:id])
+    student_ids = params[:group][:student_ids]
+    if student_ids.present?
+      students = Student.where(id: student_ids).where.not(id: @group.student_ids)
+      @group.students << students
+      redirect_to @group, notice: 'Students were successfully added to the group.'
+    else
+      redirect_to @group, alert: 'Please select students to add.'
+    end
+  end
+
+  def add_students_form
+    @group = Group.find(params[:id])
+  end
+
+  def remove_students_form
+    @group = Group.find(params[:id])
+  end
+
+  def remove_students
+    @group = Group.find(params[:id])
+    student_ids = params[:group][:student_ids]
+    if student_ids.present?
+      students = Student.where(id: student_ids)
+      @group.students.delete(students)
+      redirect_to @group, notice: 'Students were successfully removed from the group.'
+    else
+      redirect_to @group, alert: 'Please select students to remove.'
+    end
+  end
+
   # PATCH/PUT /groups/1 or /groups/1.json
   def update
     respond_to do |format|

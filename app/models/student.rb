@@ -3,6 +3,10 @@ class Student < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  belongs_to :group, optional: true
+  has_and_belongs_to_many :groups, optional: true
+
+  def full_name
+    "#{first_name} #{middle_name} #{last_name}"
+  end
 
 end

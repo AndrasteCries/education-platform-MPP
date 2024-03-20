@@ -1,10 +1,11 @@
 <div class="d-flex flex-column align-items-center">
   <h1>Editing group</h1>
+  <% if teacher_signed_in? %>
+    <%= render "form", group: @group %>
+  <% end %>
+      <div>
+        <%= link_to "Show this group", @group, class: "btn btn-primary m-2 rounded" %> |
+        <%= link_to "Back to groups", groups_path, class: "btn btn-secondary m-2 rounded" %>
+      </div>
 
-  <%= render "form", group: @group %>
-
-  <div>
-    <%= link_to "Show this group", @group, class: "btn btn-primary m-2 rounded" %> |
-    <%= link_to "Back to groups", groups_path, class: "btn btn-secondary m-2 rounded" %>
-  </div>
 </div>
