@@ -4,6 +4,11 @@ class Teacher < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :subjects
+
+  def first_initials
+    "#{last_name} #{first_name.first}. #{middle_name.first}."
+  end
 
   private
 

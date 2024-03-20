@@ -3,7 +3,7 @@ class SubjectsController < ApplicationController
 
   # GET /subjects or /subjects.json
   def index
-    @subjects = Subject.all
+    @subjects = Subject.includes(:teacher).all
   end
 
   # GET /subjects/1 or /subjects/1.json
@@ -22,6 +22,7 @@ class SubjectsController < ApplicationController
   # POST /subjects or /subjects.json
   def create
     @subject = Subject.new(subject_params)
+    @subject.teacher = current_teacher
 
     respond_to do |format|
       if @subject.save
@@ -58,13 +59,13 @@ class SubjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subject
-      @subject = Subject.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subject
+    @subject = Subject.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def subject_params
-      params.require(:subject).permit(:subject_id, :title, :description, :hours, :difficulty_level, :lessons_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def subject_params
+    params.require(:subject).permit(:subject_id, :title, :description, :hours, :difficulty_level, :lessons_id)
+  end
 end

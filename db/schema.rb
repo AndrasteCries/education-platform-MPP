@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_19_162624) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_103900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_162624) do
     t.bigint "group_id", null: false
     t.index ["group_id", "student_id"], name: "index_groups_students_on_group_id_and_student_id"
     t.index ["student_id", "group_id"], name: "index_groups_students_on_student_id_and_group_id"
+  end
+
+  create_table "groups_subjects", id: false, force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "subject_id", null: false
+    t.index ["group_id", "subject_id"], name: "index_groups_subjects_on_group_id_and_subject_id"
+    t.index ["subject_id", "group_id"], name: "index_groups_subjects_on_subject_id_and_group_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -88,6 +95,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_162624) do
     t.integer "lessons_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "teacher_id"
+  end
+
+  create_table "subjects_teachers", id: false, force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "subject_id", null: false
+    t.index ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id"
+    t.index ["teacher_id", "subject_id"], name: "index_subjects_teachers_on_teacher_id_and_subject_id"
   end
 
   create_table "tasks", force: :cascade do |t|
