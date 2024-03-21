@@ -89,6 +89,24 @@ class GroupsController < ApplicationController
     end
   end
 
+  def set_captain
+    @group = Group.find(params[:id])
+    student = Student.find(params[:group][:captain_id])
+
+    current_captain = @group.group_students.find_by(group_id: @group.id, captain: true)
+    if current_captain.present?
+      GroupStudent.where(group_id: @group.id, student_id: current_captain.student_id).update_all(captain: false)
+    end
+
+    captain_relation = @group.group_students.find_by(student_id: student.id)
+    if captain_relation
+      GroupStudent.where(group_id: @group.id, student_id: student.id).update_all(captain: true)
+      redirect_to @group, notice: "#{student.full_name} is now the captain of the group."
+    else
+      redirect_to @group, alert: "#{student.full_name} is not a member of this group."
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group

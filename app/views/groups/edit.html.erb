@@ -2,6 +2,15 @@
   <h1>Editing group</h1>
   <% if teacher_signed_in? %>
     <%= render "form", group: @group %>
+    <%= form_with(model: @group, url: set_captain_group_path(@group), method: :post, class: "captain-form") do |f| %>
+      <div class="field">
+        <%= f.label "Select captain:" %><br>
+        <%= f.collection_select :captain_id, @group.students, :id, :full_name %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Set Captain" %>
+      </div>
+    <% end %>
   <% end %>
       <div>
         <%= link_to "Show this group", @group, class: "btn btn-primary m-2 rounded" %> |

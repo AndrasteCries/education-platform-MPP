@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'add_students', action: 'add_students_form'
       get 'remove_students', action: 'remove_students_form'
     end
+    post 'set_captain', on: :member
     post 'add_students', on: :member
     post 'remove_students', on: :member
   end

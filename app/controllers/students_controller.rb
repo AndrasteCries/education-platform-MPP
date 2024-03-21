@@ -57,6 +57,10 @@ class StudentsController < ApplicationController
     end
   end
 
+  def current_student
+    current_student ||= Student.find_by(id: session[:student_id]) if session[:student_id]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student

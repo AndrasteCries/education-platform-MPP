@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_103900) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_21_122252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_103900) do
   create_table "groups_students", id: false, force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "group_id", null: false
+    t.boolean "captain"
     t.index ["group_id", "student_id"], name: "index_groups_students_on_group_id_and_student_id"
     t.index ["student_id", "group_id"], name: "index_groups_students_on_student_id_and_group_id"
   end

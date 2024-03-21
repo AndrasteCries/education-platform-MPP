@@ -4,6 +4,10 @@
   <%= render @group %>
 
   <% if @group.students.any? %>
+    <p>
+      <strong class="card-text">Captain:</strong>
+      <%= @group.captain ? @group.captain.full_name : "None" %>
+    </p>
     <h2>Students:</h2>
     <ul>
       <% @group.students.each do |student| %>

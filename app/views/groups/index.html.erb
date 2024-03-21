@@ -2,17 +2,32 @@
   <p style="color: green"><%= notice %></p>
   <h1>Groups</h1>
   <div id="groups" class="row row-cols-1 row-cols-md-3 g-1">
-    <% @groups.each do |group| %>
-      <div class="col mb-2">
-        <div class="card" style="width: 18rem;" id="<%= dom_id group %>">
-          <div class="card-body">
-            <%= render group %>
-            <p>
-              <%= link_to "Show this group", group, class: "btn btn-primary" %>
-            </p>
+    <% if current_student %>
+      <% current_student.groups.each do |group| %>
+        <div class="col mb-2">
+          <div class="card" style="width: 18rem;" id="<%= dom_id group %>">
+            <div class="card-body">
+              <%= render group %>
+              <p>
+                <%= link_to "Show this group", group, class: "btn btn-primary" %>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
+    <% else %>
+      <% @groups.each do |group| %>
+        <div class="col mb-2">
+          <div class="card" style="width: 18rem;" id="<%= dom_id group %>">
+            <div class="card-body">
+              <%= render group %>
+              <p>
+                <%= link_to "Show this group", group, class: "btn btn-primary" %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <% if teacher_signed_in? %>
