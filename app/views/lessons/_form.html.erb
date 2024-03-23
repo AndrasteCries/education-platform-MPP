@@ -13,13 +13,14 @@
 
   <div>
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_area :title %>
+    <%= form.text_field :title %>
   </div>
 
-  <div>
-    <%= form.label :subject_id, style: "display: block" %>
-    <%= form.number_field :subject_id %>
-  </div>
+<!--  <div>-->
+    <%#= form.hidden_field :subject_id, value: @subject.id %>
+<!--  </div>-->
+
+  <%= form.hidden_field :subject_id, value: params[:subject_id] %>
 
   <div>
     <%= form.label :notes, style: "display: block" %>
@@ -27,13 +28,13 @@
   </div>
 
   <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
+    <%= form.label :lesson_type, style: "display: block" %>
+    <%= form.select :lesson_type, Lesson.lesson_types.keys %>
   </div>
 
   <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.number_field :teacher_id %>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
   </div>
 
   <div>

@@ -22,7 +22,16 @@ class LessonsController < ApplicationController
   # POST /lessons or /lessons.json
   def create
     @lesson = Lesson.new(lesson_params)
+    @lesson.subject = Subject.find_by(id: lesson_params[:subject_id])
+    puts "Params: #{params.inspect}"
+    # puts "Lesson params: #{lesson_params.inspect}"
+    # begin
+    #   puts "Subject123: #{lesson_params[:subject_id]}"
+    # rescue => e
+    #   puts "Error occurred: #{e.message}"
+    # end
 
+    puts "Subject: #{@lesson.subject.inspect}"
     respond_to do |format|
       if @lesson.save
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully created." }
@@ -33,6 +42,7 @@ class LessonsController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
@@ -64,7 +74,7 @@ class LessonsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def lesson_params
-      params.require(:lesson).permit(:title, :subject_id, :notes, :date, :teacher_id)
-    end
+  def lesson_params
+    params.require(:lesson).permit(:title, :notes, :date, :lesson_type, :subject_id)
+  end
 end
