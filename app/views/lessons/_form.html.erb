@@ -1,6 +1,6 @@
-<%= form_with(model: lesson) do |form| %>
+<%= form_with(model: lesson, class: "mt-4") do |form| %>
   <% if lesson.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
 
       <ul>
@@ -11,33 +11,34 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
-
-<!--  <div>-->
-    <%#= form.hidden_field :subject_id, value: @subject.id %>
-<!--  </div>-->
 
   <%= form.hidden_field :subject_id, value: params[:subject_id] %>
 
-  <div>
-    <%= form.label :notes, style: "display: block" %>
-    <%= form.text_area :notes %>
+  <div class="mb-3">
+    <%= form.label :notes, class: "form-label" %>
+    <%= form.text_area :notes, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :lesson_type, style: "display: block" %>
-    <%= form.select :lesson_type, Lesson.lesson_types.keys %>
+  <div class="mb-3">
+    <%= form.label :lesson_type, class: "form-label" %>
+    <%= form.select :lesson_type, Lesson.lesson_types.keys, { include_blank: "Select Lesson Type" }, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
+  <div class="mb-3">
+    <%= form.label :lesson_time, class: "form-label" %>
+    <%= form.select :lesson_time, Lesson.lesson_times.keys, { include_blank: "Select Lesson Time" }, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.label :date, class: "form-label" %>
+    <%= form.date_field :date, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

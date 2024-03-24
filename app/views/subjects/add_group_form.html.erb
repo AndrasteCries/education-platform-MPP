@@ -1,0 +1,44 @@
+<div class="container mt-3">
+  <p class="text-success"><%= notice %></p>
+
+  <%= render @subject %>
+
+  <% if @subject.groups.any? %>
+    <h2>Groups:</h2>
+    <ul>
+      <% @subject.groups.each do |group| %>
+        <li><%= group.title %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No groups for this subject.</p>
+  <% end %>
+
+  <% if teacher_signed_in? %>
+    <%= form_with(model: [@subject, Group.new], url: add_group_subject_path(@subject), method: :post, class: "group-form") do |f| %>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <%= text_field_tag :search, nil, placeholder: "Search groups", class: "form-control search-input" %>
+        </div>
+      </div>
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <%= f.label "Select groups to add:" %>
+          <div class="group-list" style="max-height: 200px; overflow-y: auto;">
+            <% Group.where.not(id: @subject.group_ids).each do |group| %>
+              <div class="form-check">
+                <%= check_box_tag "subject[group_ids][]", group.id, @subject.groups.exclude?(group), class: "form-check-input" %>
+                <%= label_tag "subject_group_ids_#{group.id}", group.name, class: "form-check-label" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <%= f.submit "Add Groups", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

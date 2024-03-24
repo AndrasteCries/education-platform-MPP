@@ -35,6 +35,15 @@ class SubjectsController < ApplicationController
     end
   end
 
+  def add_group_form
+    @subject = Subject.find(params[:subject_id])
+  end
+
+  def remove_group_form
+    @subject = Subject.find(params[:subject_id])
+    @group = Group.find(params[:id])
+  end
+
   # PATCH/PUT /subjects/1 or /subjects/1.json
   def update
     respond_to do |format|

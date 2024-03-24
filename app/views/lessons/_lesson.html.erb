@@ -1,27 +1,10 @@
-<div id="<%= dom_id lesson %>">
-  <p>
-    <strong>Title:</strong>
-    <%= lesson.title %>
-  </p>
-
-  <p>
-    <strong>Subject:</strong>
-    <%= lesson.subject_id %>
-  </p>
-
-  <p>
-    <strong>Notes:</strong>
-    <%= lesson.notes %>
-  </p>
-
-  <p>
-    <strong>Date:</strong>
-    <%= lesson.date %>
-  </p>
-
-  <p>
-    <strong>Teacher:</strong>
-    <%= lesson.teacher_id %>
-  </p>
-
+<div id="<%= dom_id lesson %>" class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Title: <%= lesson.title %></h5>
+    <p class="card-text">Subject: <%= lesson.subject_id %></p>
+    <p class="card-text">Notes: <%= lesson.notes %></p>
+    <p class="card-text">Lesson type: <%= lesson.lesson_type %></p>
+    <p class="card-text">Time : <%= lesson.lesson_time %></p>
+    <p class="card-text">Date: <%= lesson.date %></p>
+  </div>
 </div>

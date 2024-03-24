@@ -16,7 +16,12 @@ Rails.application.routes.draw do
     post 'remove_students', on: :member
   end
   resources :teachers
-  resources :subjects
+  resources :subjects do
+    member do
+      get 'add_group', action: 'add_group_form'
+    end
+    post 'add_group', on: :member
+  end
   resources :lessons
   resources :tasks
   resources :students

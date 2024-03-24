@@ -1,14 +1,51 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Lessons</h1>
+<h1>Schedule</h1>
 
-<div id="lessons">
-  <% @lessons.each do |lesson| %>
-    <%= render lesson %>
-    <p>
-      <%= link_to "Show this lesson", lesson %>
-    </p>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Time</th>
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+    <th>Sunday</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @time_slots.each do |time| %>
+    <tr>
+      <td><%= time %></td>
+      <% (Date.today.beginning_of_week..Date.today.end_of_week).each do |day| %>
+        <% lessons = @lessons_by_day[day] || [] %>
+        <% lesson_at_time = lessons.find { |lesson| lesson.lesson_time == time } %>
+        <% if lesson_at_time %>
+          <% lesson_type_class = case lesson_at_time.lesson_type
+                                 when 'lecture' then 'bg-info'
+                                 when 'seminar' then 'bg-warning'
+                                 when 'practical' then 'bg-success'
+                                 else ''
+                                 end %>
+          <td class="<%= lesson_type_class %>">
+            <%= link_to lesson_at_time.title, lesson_path(lesson_at_time), class: "btn btn-sm btn-black"%>
+          </td>
+        <% else %>
+          <td></td>
+        <% end %>
+      <% end %>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
 
-<%= link_to "New lesson", new_lesson_path %>
+<div class="legend">
+  <h3>Legend:</h3>
+  <ul>
+    <li><div class="legend-color bg-info">Lecture</div> </li>
+    <li><div class="legend-color bg-warning">Seminar</div> </li>
+    <li><div class="legend-color bg-success">Practical</div> </li>
+  </ul>
+</div>

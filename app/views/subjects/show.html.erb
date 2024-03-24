@@ -13,6 +13,7 @@
   </div>
 
   <div class="btn-group mt-2" role="group" aria-label="Group actions">
+    <%= link_to "Add Group", add_group_subject_path(subject_id: @subject.id) %>
     <%= link_to "Create Lesson", new_lesson_path(subject_id: @subject.id), class: "btn btn-primary m-2 rounded" %>
     <%= link_to "Edit this subject", edit_subject_path(@subject), class: "btn btn-primary m-2 rounded" %> 
     <%= link_to "Back to subjects", subjects_path, class: "btn btn-secondary m-2 rounded" %> 

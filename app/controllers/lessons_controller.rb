@@ -3,8 +3,26 @@ class LessonsController < ApplicationController
 
   # GET /lessons or /lessons.json
   def index
-    @lessons = Lesson.all
+    @lessons_by_day = {}
+    @start_of_week = Date.today.beginning_of_week - 3.days
+    @end_of_week = Date.today.end_of_week + 3.days
+    @time_slots = %w[8:30 10:10 12:00 13:40 15:20 17:00]
+
+    (@start_of_week..@end_of_week).each do |date|
+      if current_teacher
+        lessons_on_day = Lesson.joins(:subject).where(date: date, subjects: { teacher_id: current_teacher.id })
+      elsif current_student
+        student_groups = current_student.groups
+        group_ids = student_groups.pluck(:id)
+        lessons = Lesson.joins(subject: :groups).where(groups_subjects: { group_id: group_ids })
+        lessons_on_day = lessons.where(date: date)
+      else
+        lessons_on_day = []
+      end
+      @lessons_by_day[date] = lessons_on_day unless lessons_on_day.empty?
+    end
   end
+
 
   # GET /lessons/1 or /lessons/1.json
   def show
@@ -23,15 +41,18 @@ class LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(lesson_params)
     @lesson.subject = Subject.find_by(id: lesson_params[:subject_id])
-    puts "Params: #{params.inspect}"
-    # puts "Lesson params: #{lesson_params.inspect}"
-    # begin
-    #   puts "Subject123: #{lesson_params[:subject_id]}"
-    # rescue => e
-    #   puts "Error occurred: #{e.message}"
-    # end
+    lesson_time = Lesson.lesson_times[lesson_params[:lesson_time]]
+    date = Date.parse(lesson_params[:date])
 
-    puts "Subject: #{@lesson.subject.inspect}"
+    existing_lesson = Lesson.find_by(date: date, lesson_time: lesson_time)
+    if existing_lesson.present?
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity, locals: { lesson: @lesson } }
+        format.json { render json: { error:  "A lesson for this time and date already exists."}, status: :unprocessable_entity }
+      end
+      return
+    end
+
     respond_to do |format|
       if @lesson.save
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully created." }
@@ -75,6 +96,6 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
   def lesson_params
-    params.require(:lesson).permit(:title, :notes, :date, :lesson_type, :subject_id)
+    params.require(:lesson).permit(:title, :notes, :date, :lesson_type, :subject_id, :lesson_time)
   end
 end
