@@ -35,6 +35,20 @@ class SubjectsController < ApplicationController
     end
   end
 
+  def add_group
+    @subject = Subject.find(params[:id])
+    group_ids = params[:subject][:group_ids]
+    if group_ids.present?
+      groups = Group.where(id: group_ids).where.not(id: @subject.group_ids)
+      @subject.groups << groups
+      puts "NIGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA"
+      redirect_to @subject, notice: 'Students were successfully added to the group.'
+    else
+      redirect_to @subject, alert: 'Please select students to add.'
+      puts "NIGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGAwerewrwerqwerqwereqwrqwerqwerqwer"
+    end
+  end
+
   def add_group_form
     @subject = Subject.find(params[:subject_id])
   end

@@ -12,7 +12,12 @@
   <%= subject.teacher.first_initials %>
 </p>
 <p>
+  <strong class="card-text">Groups:</strong>
+  <% subject.groups.each do |group| %>
+    <%= group.name %><br>
+  <% end %>
+</p>
+<p>
   <strong class="card-text">Hours count:</strong>
   <%= subject.hours %>
 </p>
-

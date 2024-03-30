@@ -14,8 +14,19 @@ class LessonsController < ApplicationController
       elsif current_student
         student_groups = current_student.groups
         group_ids = student_groups.pluck(:id)
-        lessons = Lesson.joins(subject: :groups).where(groups_subjects: { group_id: group_ids })
+        lessons = []
+        group_ids.each do |group_id|
+          group = Group.find(group_id)
+          puts group.subjects
+          group_ids = student_groups.pluck(:id)
+          lessons = Lesson.joins(subject: :groups).where(groups: { id: group_ids })
+        end
+        puts "LESSSSSSSOOOONNNNSSSSS"
+        puts lessons
+        # lessons_on_day = []
         lessons_on_day = lessons.where(date: date)
+        puts "LESSSSSSSOOOONNNNSSSSS OOOOOOOOOOOOOON DAAAAAAAAAAAY"
+        puts lessons_on_day
       else
         lessons_on_day = []
       end
