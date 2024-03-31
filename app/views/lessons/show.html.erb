@@ -3,8 +3,9 @@
 <%= render @lesson %>
 
 <div>
-  <%= link_to "Edit this lesson", edit_lesson_path(@lesson) %> |
   <%= link_to "Back to Subject", subject_path(@lesson.subject) %>
-
-  <%= button_to "Destroy this lesson", @lesson, method: :delete %>
+  <% if teacher_signed_in?%>
+    <%= button_to "Destroy this lesson", @lesson, method: :delete %>
+    <%= link_to "Edit this lesson", edit_lesson_path(@lesson) %>
+  <% end %>
 </div>

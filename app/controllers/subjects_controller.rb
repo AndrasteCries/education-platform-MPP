@@ -4,7 +4,7 @@ class SubjectsController < ApplicationController
   # GET /subjects or /subjects.json
   def index
     if current_teacher
-      @subjects = Subject.where(teacher_id: current_teacher.id).all
+      @subjects = Subject.where(teacher_id: current_teacher.id)
     elsif current_student
       student_groups = current_student.groups
       group_ids = student_groups.pluck(:id)

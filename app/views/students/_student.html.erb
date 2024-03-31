@@ -15,8 +15,10 @@
   </p>
 
   <p>
-    <strong>Group:</strong>
-    <%= student.group_id %>
+    <strong class="card-text">Groups:</strong>
+    <% student.groups.each do |group| %>
+      <%= group.name %><br>
+    <% end %>
   </p>
 
   <p>
