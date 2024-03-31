@@ -18,7 +18,7 @@
   <div class="btn-group mt-2" role="group" aria-label="Group actions">
     <% if teacher_signed_in?%>
       <%= link_to "Add Group", add_group_subject_path(subject_id: @subject.id), class: "btn btn-primary m-2 rounded" %>
-      <%= link_to "Create Lesson", new_lesson_path(subject_id: @subject.id), class: "btn btn-primary m-2 rounded" %>
+      <%= link_to "Create Lesson", new_lesson_path(subject_id: @subject.id), class: "btn btn-primary m-2 rounded"%>
       <%= link_to "Edit this subject", edit_subject_path(@subject), class: "btn btn-primary m-2 rounded" %>
       <%= button_to "Destroy this subject", @subject, method: :delete, class: "btn btn-danger m-2 rounded" %>
     <% end %>

@@ -5,7 +5,8 @@
 <div>
   <%= link_to "Back to Subject", subject_path(@lesson.subject) %>
   <% if teacher_signed_in?%>
-    <%= button_to "Destroy this lesson", @lesson, method: :delete %>
-    <%= link_to "Edit this lesson", edit_lesson_path(@lesson) %>
+    <%= link_to "Create task", new_task_path(lesson_id: @lesson.id), class: "btn btn-primary m-2 rounded" %>
+    <%= button_to "Destroy this lesson", @lesson, method: :delete, class: "btn btn-danger m-2 rounded" %>
+    <%= link_to "Edit this lesson", edit_lesson_path(@lesson), class: "btn btn-primary m-2 rounded"  %>
   <% end %>
 </div>

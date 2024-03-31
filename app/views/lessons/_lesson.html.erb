@@ -6,5 +6,10 @@
     <p class="card-text">Lesson type: <%= lesson.lesson_type %></p>
     <p class="card-text">Time : <%= lesson.lesson_time %></p>
     <p class="card-text">Date: <%= lesson.date %></p>
+    <% lesson.tasks.each_with_index do |task, index| %>
+      <p><%= index + 1 %>. Title: <%= task.title %> (Max Mark: <%= task.max_mark %>)
+        <%= link_to "View Task", task_path(task), class: "btn btn-primary btn-sm ml-2" %>
+      </p>
+    <% end %>
   </div>
 </div>

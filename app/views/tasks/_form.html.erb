@@ -16,10 +16,7 @@
     <%= form.text_area :title %>
   </div>
 
-  <div>
-    <%= form.label :lesson_id, style: "display: block" %>
-    <%= form.number_field :lesson_id %>
-  </div>
+  <%= form.hidden_field :lesson_id, value: params[:lesson_id] %>
 
   <div>
     <%= form.label :notes, style: "display: block" %>
