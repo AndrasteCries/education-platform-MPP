@@ -3,7 +3,21 @@ class SubjectsController < ApplicationController
 
   # GET /subjects or /subjects.json
   def index
-    @subjects = Subject.includes(:teacher).all
+    if current_teacher
+      @subjects = Subject.where(teacher_id: current_teacher.id).all
+    elsif current_student
+      student_groups = current_student.groups
+      group_ids = student_groups.pluck(:id)
+      subjects = []
+      group_ids.each do |group_id|
+        group_ids = student_groups.pluck(:id)
+        subjects = Subject.joins(:groups).where(groups: { id: group_ids })
+      end
+      subjects.length <= 0 ? @subjects = [] : @subjects = subjects
+    else
+      @subjects = []
+    end
+
   end
 
   # GET /subjects/1 or /subjects/1.json
@@ -41,11 +55,9 @@ class SubjectsController < ApplicationController
     if group_ids.present?
       groups = Group.where(id: group_ids).where.not(id: @subject.group_ids)
       @subject.groups << groups
-      puts "NIGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA"
       redirect_to @subject, notice: 'Students were successfully added to the group.'
     else
       redirect_to @subject, alert: 'Please select students to add.'
-      puts "NIGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGAwerewrwerqwerqwereqwrqwerqwerqwer"
     end
   end
 

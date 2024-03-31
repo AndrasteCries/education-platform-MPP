@@ -28,6 +28,8 @@ gem 'sassc-rails'
 
 gem 'devise'
 
+gem 'letter_opener'
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 end
