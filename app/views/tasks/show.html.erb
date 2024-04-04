@@ -30,7 +30,13 @@
 
   <% if student_signed_in? %>
     <% if current_student.student_responses.exists?(task_id: @task.id) %>
-      <%= link_to "Your answer", student_response_path(current_student.student_responses.find_by(task_id: @task.id)), class: "btn btn-primary m-2 rounded" %>
+      <% response = current_student.student_responses.find_by(task_id: @task.id) %>
+      <% if response.mark_id.present? %>
+        <p>Your response has been evaluated. Mark: <%= Mark.find(response.mark_id).mark %></p>
+      <% else %>
+        <p>Your response has not been evaluated yet.</p>
+      <% end %>
+      <%= link_to "View your response", student_response_path(response), class: "btn btn-primary m-2 rounded" %>
     <% else %>
       <%= link_to "Provide your answer", new_student_response_path(task_id: @task.id), class: "btn btn-primary m-2 rounded" %>
     <% end %>
