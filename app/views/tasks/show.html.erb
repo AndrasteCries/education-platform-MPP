@@ -3,8 +3,36 @@
 <%= render @task %>
 
 <div>
-  <%= link_to "Edit this task", edit_task_path(@task) %> |
-  <%= link_to "Back to tasks", tasks_path %>
+  <% if teacher_signed_in? %>
+    <% if @student_responses.any? %>
+      <h2>Student Responses:</h2>
+      <ul>
+        <% @student_responses.each do |response| %>
+          <li>
+            <%= link_to response.student.full_name, student_response_path(response) %>
+            <% if response.mark_id.present? %>
+              <% mark = Mark.find(response.mark_id) %>
+              <span style="color: green;"><%= mark.mark %></span>
+            <% else %>
+              <span style="color: red;"> Not evaluated </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No responses yet.</p>
+    <% end %>
+    <%= link_to "Edit this task", edit_task_path(@task), class: "btn btn-primary m-2 rounded" %> |
+    <%= button_to "Destroy this task", @task, method: :delete, class: "btn btn-primary m-2 rounded" %>
+  <% end %>
 
-  <%= button_to "Destroy this task", @task, method: :delete %>
+  <%= link_to "Back to lesson", lesson_path(@task.lesson), class: "btn btn-primary m-2 rounded" %>
+
+  <% if student_signed_in? %>
+    <% if current_student.student_responses.exists?(task_id: @task.id) %>
+      <%= link_to "Your answer", student_response_path(current_student.student_responses.find_by(task_id: @task.id)), class: "btn btn-primary m-2 rounded" %>
+    <% else %>
+      <%= link_to "Provide your answer", new_student_response_path(task_id: @task.id), class: "btn btn-primary m-2 rounded" %>
+    <% end %>
+  <% end %>
 </div>

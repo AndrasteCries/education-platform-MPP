@@ -1,0 +1,42 @@
+<h1 class="mb-4">Student Response</h1>
+
+<div class="card">
+  <div class="card-body">
+    <p class="card-text"><strong>Student:</strong> <%= @student_response.student.full_name %></p>
+    <p class="card-text"><strong>Task:</strong> <%= @student_response.task.title %></p>
+    <% if @student_response.file.attached? %>
+      <p class="card-text"><strong>Attached File:</strong> <%= link_to @student_response.file.filename, url_for(@student_response.file), class: "btn btn-primary" %></p>
+    <% else %>
+      <p class="card-text"><strong>Attached File:</strong> No file attached</p>
+    <% end %>
+  </div>
+  <% if teacher_signed_in? && !@student_response.mark_id.present? %>
+    <div class="card-footer">
+      <%= form_with(model: @student_response, url: evaluate_student_response_path(@student_response), method: :post) do |form| %>
+        <div class="form-group">
+          <%= form.label :mark, "Mark" %>
+          <%= form.number_field :mark, class: "form-control", min: 0, max: @max_mark %>
+        </div>
+        <%= form.submit "Evaluate", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% elsif student_signed_in? %>
+    <%= button_to "Destroy this response", @student_response, method: :delete, class: "btn btn-danger m-2 rounded" %>
+  <% end %>
+
+  <%= link_to "Back to Task", task_path(@student_response.task), class: "btn btn-primary m-2 rounded" %>
+</div>
+
+<% if @student_response.mark_id.present? %>
+  <div class="card mt-4">
+    <div class="card-body">
+      <p class="card-text"><strong>Mark:</strong> <%= @student_response.mark_id %></p>
+    </div>
+  </div>
+<% else %>
+  <div class="card mt-4">
+    <div class="card-body">
+      <p class="card-text">This response has not been evaluated yet.</p>
+    </div>
+  </div>
+<% end %>

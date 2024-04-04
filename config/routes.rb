@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   resources :tasks
   resources :students
   resources :marks
+  resources :student_responses do
+    post 'evaluate', on: :member
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 
