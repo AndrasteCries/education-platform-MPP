@@ -5,7 +5,7 @@ class Teacher < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :subjects
-
+  has_many :messages, as: :recipient
   def first_initials
     "#{last_name} #{first_name.first}. #{middle_name.first}."
   end

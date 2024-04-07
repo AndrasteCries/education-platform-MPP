@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
     @students = Student.all
     render 'pages/main'
   end
+
+  def chat
+    render 'pages/chatroom'
+  end
 end

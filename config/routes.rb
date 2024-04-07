@@ -3,7 +3,7 @@ Rails.application.routes.draw do
                                                          registrations: "students/registrations" }
   devise_for :teachers, path: 'teachers', controllers: { sessions: "teachers/sessions",
                                                          registrations: "teachers/registrations" }
-
+  get 'chat_room/', to: 'application#chat'
   root 'application#welcome'
   resources :subject_teachers
   resources :groups do

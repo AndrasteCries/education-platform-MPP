@@ -17,7 +17,6 @@ class SubjectsController < ApplicationController
     else
       @subjects = []
     end
-
   end
 
   # GET /subjects/1 or /subjects/1.json

@@ -2,6 +2,7 @@
 //= require bootstrap
 import "@hotwired/turbo-rails"
 import "controllers"
+import "channels"
 
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.querySelector('.search-input');
