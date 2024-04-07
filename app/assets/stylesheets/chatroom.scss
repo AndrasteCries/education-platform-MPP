@@ -12,6 +12,57 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.replay {
+  display: block;
+  width: 100%;
+  text-align: right;
+  position: relative;
+
+  &:before {
+    display: block;
+    clear: both;
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    right: -7px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 12px 15px 12px;
+    border-color: transparent transparent #4b7bec transparent;
+    transform: rotate(37deg);
+  }
+
+  p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    padding: 15px;
+    background: #4b7bec;
+    display: inline-block;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-bottom: 0;
+
+    b {
+      display: block;
+      color: #061061;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+  }
+
+  &:after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
+
 .message-area {
   height: 100vh;
   overflow: hidden;
@@ -191,7 +242,6 @@ html {
       }
     }
   }
-
   .send-box {
     button {
       width: 28%;
