@@ -9,6 +9,9 @@ class Teacher < ApplicationRecord
   def first_initials
     "#{last_name} #{first_name.first}. #{middle_name.first}."
   end
+  def self.recent(limit)
+    order(created_at: :desc).limit(limit)
+  end
 
   private
 

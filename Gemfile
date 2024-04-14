@@ -29,6 +29,7 @@ gem "sassc-rails"
 gem "devise"
 
 gem "rubocop"
+gem 'activeadmin'
 
 gem "letter_opener"
 
