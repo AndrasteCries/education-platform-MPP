@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[ show edit update destroy ]
+  before_action :set_student, only: %i[show edit update destroy]
 
   # GET /students or /students.json
   def index
@@ -7,8 +7,7 @@ class StudentsController < ApplicationController
   end
 
   # GET /students/1 or /students/1.json
-  def show
-  end
+  def show; end
 
   # GET /students/new
   def new
@@ -16,8 +15,7 @@ class StudentsController < ApplicationController
   end
 
   # GET /students/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /students or /students.json
   def create
@@ -62,14 +60,14 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def student_params
-      params.require(:student).permit(:first_name, :middle_name, :last_name, :phone_number, :email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params[:id])
+  end
 
+  # Only allow a list of trusted parameters through.
+  def student_params
+    params.require(:student).permit(:first_name, :middle_name, :last_name, :phone_number, :email)
+  end
 end

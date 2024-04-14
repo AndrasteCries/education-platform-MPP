@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: %i[ show edit update destroy ]
+  before_action :set_group, only: %i[show edit update destroy]
 
   # GET /groups or /groups.json
   def index
@@ -7,8 +7,7 @@ class GroupsController < ApplicationController
   end
 
   # GET /groups/1 or /groups/1.json
-  def show
-  end
+  def show; end
 
   # GET /groups/new
   def new
@@ -16,8 +15,7 @@ class GroupsController < ApplicationController
   end
 
   # GET /groups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /groups or /groups.json
   def create
@@ -40,9 +38,9 @@ class GroupsController < ApplicationController
     if student_ids.present?
       students = Student.where(id: student_ids).where.not(id: @group.student_ids)
       @group.students << students
-      redirect_to @group, notice: 'Students were successfully added to the group.'
+      redirect_to @group, notice: "Students were successfully added to the group."
     else
-      redirect_to @group, alert: 'Please select students to add.'
+      redirect_to @group, alert: "Please select students to add."
     end
   end
 
@@ -60,9 +58,9 @@ class GroupsController < ApplicationController
     if student_ids.present?
       students = Student.where(id: student_ids)
       @group.students.delete(students)
-      redirect_to @group, notice: 'Students were successfully removed from the group.'
+      redirect_to @group, notice: "Students were successfully removed from the group."
     else
-      redirect_to @group, alert: 'Please select students to remove.'
+      redirect_to @group, alert: "Please select students to remove."
     end
   end
 
@@ -108,13 +106,14 @@ class GroupsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def group_params
-      params.require(:group).permit(:group_id, :name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group
+    @group = Group.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def group_params
+    params.require(:group).permit(:group_id, :name)
+  end
 end

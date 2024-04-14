@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-  before_action :set_lesson, only: %i[ show edit update destroy ]
+  before_action :set_lesson, only: %i[show edit update destroy]
 
   # GET /lessons or /lessons.json
   def index
@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
 
     (@start_of_week..@end_of_week).each do |date|
       if current_teacher
-        lessons_on_day = Lesson.joins(:subject).where(date: date, subjects: { teacher_id: current_teacher.id })
+        lessons_on_day = Lesson.joins(:subject).where(date:, subjects: {teacher_id: current_teacher.id})
       elsif current_student
         student_groups = current_student.groups
         group_ids = student_groups.pluck(:id)
@@ -19,9 +19,9 @@ class LessonsController < ApplicationController
           group = Group.find(group_id)
           puts group.subjects
           group_ids = student_groups.pluck(:id)
-          lessons = Lesson.joins(subject: :groups).where(groups: { id: group_ids })
+          lessons = Lesson.joins(subject: :groups).where(groups: {id: group_ids})
         end
-        lessons_on_day = lessons.where(date: date)
+        lessons_on_day = lessons.where(date:)
       else
         lessons_on_day = []
       end
@@ -29,10 +29,8 @@ class LessonsController < ApplicationController
     end
   end
 
-
   # GET /lessons/1 or /lessons/1.json
-  def show
-  end
+  def show; end
 
   # GET /lessons/new
   def new
@@ -40,8 +38,7 @@ class LessonsController < ApplicationController
   end
 
   # GET /lessons/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /lessons or /lessons.json
   def create
@@ -50,11 +47,13 @@ class LessonsController < ApplicationController
     lesson_time = Lesson.lesson_times[lesson_params[:lesson_time]]
     date = Date.parse(lesson_params[:date])
 
-    existing_lesson = Lesson.find_by(date: date, lesson_time: lesson_time)
+    existing_lesson = Lesson.find_by(date:, lesson_time:)
     if existing_lesson.present?
       respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity, locals: { lesson: @lesson } }
-        format.json { render json: { error:  "A lesson for this time and date already exists."}, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, locals: {lesson: @lesson} }
+        format.json do
+          render json: {error: "A lesson for this time and date already exists."}, status: :unprocessable_entity
+        end
       end
       return
     end
@@ -69,7 +68,6 @@ class LessonsController < ApplicationController
       end
     end
   end
-
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
@@ -95,12 +93,13 @@ class LessonsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lesson
-      @lesson = Lesson.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lesson
+    @lesson = Lesson.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
   def lesson_params
     params.require(:lesson).permit(:title, :notes, :date, :lesson_type, :subject_id, :lesson_time)
   end

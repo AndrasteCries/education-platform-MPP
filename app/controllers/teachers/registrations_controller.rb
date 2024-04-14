@@ -22,7 +22,6 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   # GET /resource/edit
@@ -57,6 +56,7 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     super(resource)
   end
+
   def after_inactive_sign_up_path_for(resource)
     super(resource)
   end
@@ -66,6 +66,7 @@ class Teachers::RegistrationsController < Devise::RegistrationsController
   def sign_up_params
     params.require(:teacher).permit(:first_name, :middle_name, :last_name, :email, :password, :password_confirmation)
   end
+
   def teacher_params
     params.require(:teacher).permit(:first_name, :middle_name, :last_name, :email, :password, :password_confirmation)
   end

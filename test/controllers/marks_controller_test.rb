@@ -17,7 +17,9 @@ class MarksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create mark" do
     assert_difference("Mark.count") do
-      post marks_url, params: { mark: { date: @mark.date, mark: @mark.mark, student_id: @mark.student_id, task_id: @mark.task_id } }
+      post marks_url,
+           params: {mark: {date: @mark.date, mark: @mark.mark, student_id: @mark.student_id,
+                           task_id: @mark.task_id}}
     end
 
     assert_redirected_to mark_url(Mark.last)
@@ -34,7 +36,8 @@ class MarksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update mark" do
-    patch mark_url(@mark), params: { mark: { date: @mark.date, mark: @mark.mark, student_id: @mark.student_id, task_id: @mark.task_id } }
+    patch mark_url(@mark),
+          params: {mark: {date: @mark.date, mark: @mark.mark, student_id: @mark.student_id, task_id: @mark.task_id}}
     assert_redirected_to mark_url(@mark)
   end
 

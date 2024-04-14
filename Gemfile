@@ -18,20 +18,22 @@ gem "stimulus-rails"
 
 gem "jbuilder"
 
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 gem "bootsnap", require: false
 
-gem 'bootstrap', '~> 5.3.2'
-gem 'jquery-rails'
-gem 'sassc-rails'
+gem "bootstrap", "~> 5.3.2"
+gem "jquery-rails"
+gem "sassc-rails"
 
-gem 'devise'
+gem "devise"
 
-gem 'letter_opener'
+gem "rubocop"
+
+gem "letter_opener"
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ]
+  gem "debug", platforms: %i[mri windows]
 end
 
 group :development do

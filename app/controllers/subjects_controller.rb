@@ -1,5 +1,5 @@
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: %i[ show edit update destroy ]
+  before_action :set_subject, only: %i[show edit update destroy]
 
   # GET /subjects or /subjects.json
   def index
@@ -9,19 +9,18 @@ class SubjectsController < ApplicationController
       student_groups = current_student.groups
       group_ids = student_groups.pluck(:id)
       subjects = []
-      group_ids.each do |group_id|
+      group_ids.each do |_group_id|
         group_ids = student_groups.pluck(:id)
-        subjects = Subject.joins(:groups).where(groups: { id: group_ids })
+        subjects = Subject.joins(:groups).where(groups: {id: group_ids})
       end
-      subjects.length <= 0 ? @subjects = [] : @subjects = subjects
+      @subjects = subjects.length <= 0 ? [] : subjects
     else
       @subjects = []
     end
   end
 
   # GET /subjects/1 or /subjects/1.json
-  def show
-  end
+  def show; end
 
   # GET /subjects/new
   def new
@@ -29,8 +28,7 @@ class SubjectsController < ApplicationController
   end
 
   # GET /subjects/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /subjects or /subjects.json
   def create
@@ -54,9 +52,9 @@ class SubjectsController < ApplicationController
     if group_ids.present?
       groups = Group.where(id: group_ids).where.not(id: @subject.group_ids)
       @subject.groups << groups
-      redirect_to @subject, notice: 'Students were successfully added to the group.'
+      redirect_to @subject, notice: "Students were successfully added to the group."
     else
-      redirect_to @subject, alert: 'Please select students to add.'
+      redirect_to @subject, alert: "Please select students to add."
     end
   end
 
@@ -93,6 +91,7 @@ class SubjectsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_subject
     @subject = Subject.find(params[:id])

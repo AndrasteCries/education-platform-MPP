@@ -17,7 +17,9 @@ class SubjectTeachersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create subject_teacher" do
     assert_difference("SubjectTeacher.count") do
-      post subject_teachers_url, params: { subject_teacher: { group_id: @subject_teacher.group_id, subject_id: @subject_teacher.subject_id, teacher_id: @subject_teacher.teacher_id } }
+      post subject_teachers_url,
+           params: {subject_teacher: {group_id: @subject_teacher.group_id, subject_id: @subject_teacher.subject_id,
+                                      teacher_id: @subject_teacher.teacher_id}}
     end
 
     assert_redirected_to subject_teacher_url(SubjectTeacher.last)
@@ -34,7 +36,9 @@ class SubjectTeachersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update subject_teacher" do
-    patch subject_teacher_url(@subject_teacher), params: { subject_teacher: { group_id: @subject_teacher.group_id, subject_id: @subject_teacher.subject_id, teacher_id: @subject_teacher.teacher_id } }
+    patch subject_teacher_url(@subject_teacher),
+          params: {subject_teacher: {group_id: @subject_teacher.group_id, subject_id: @subject_teacher.subject_id,
+                                     teacher_id: @subject_teacher.teacher_id}}
     assert_redirected_to subject_teacher_url(@subject_teacher)
   end
 

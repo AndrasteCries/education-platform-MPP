@@ -22,13 +22,7 @@ class Students::RegistrationsController < Devise::RegistrationsController
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
-
   end
-
-
-
-
-
 
   # GET /resource/edit
   # def edit
@@ -85,5 +79,4 @@ class Students::RegistrationsController < Devise::RegistrationsController
   def student_params
     params.require(:student).permit(:first_name, :middle_name, :last_name, :email, :password, :password_confirmation)
   end
-
 end

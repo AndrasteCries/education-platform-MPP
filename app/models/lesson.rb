@@ -1,7 +1,7 @@
 class Lesson < ApplicationRecord
   belongs_to :subject
   has_many :tasks
-  enum lesson_type: { lecture: 0, seminar: 1, practical: 2 }
+  enum lesson_type: {lecture: 0, seminar: 1, practical: 2}
   enum lesson_time: {
     "8:30" => 0,
     "10:10" => 1,

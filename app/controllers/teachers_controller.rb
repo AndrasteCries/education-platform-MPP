@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: %i[ show edit update destroy ]
+  before_action :set_teacher, only: %i[show edit update destroy]
 
   # GET /teachers or /teachers.json
   def index
@@ -7,8 +7,7 @@ class TeachersController < ApplicationController
   end
 
   # GET /teachers/1 or /teachers/1.json
-  def show
-  end
+  def show; end
 
   # GET /teachers/new
   def new
@@ -16,8 +15,7 @@ class TeachersController < ApplicationController
   end
 
   # GET /teachers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /teachers or /teachers.json
   def create
@@ -32,7 +30,6 @@ class TeachersController < ApplicationController
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   # PATCH/PUT /teachers/1 or /teachers/1.json
@@ -59,17 +56,19 @@ class TeachersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_teacher
-    if params[:id] == 'sign_out'
-      @teacher = Teacher.find(1)
-    else
-      @teacher = Teacher.find(params[:id])
-    end
+    @teacher = if params[:id] == "sign_out"
+                 Teacher.find(1)
+               else
+                 Teacher.find(params[:id])
+               end
   end
 
-    # Only allow a list of trusted parameters through.
-    def teacher_params
-      params.require(:teacher).permit(:teacher_id, :first_name, :middle_name, :last_name, :email, :password, :password_confirmation)
-    end
+  # Only allow a list of trusted parameters through.
+  def teacher_params
+    params.require(:teacher).permit(:teacher_id, :first_name, :middle_name, :last_name, :email, :password,
+                                    :password_confirmation)
+  end
 end

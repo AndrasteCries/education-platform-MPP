@@ -1,5 +1,5 @@
 class MarksController < ApplicationController
-  before_action :set_mark, only: %i[ show edit update destroy ]
+  before_action :set_mark, only: %i[show edit update destroy]
 
   # GET /marks or /marks.json
   def index
@@ -7,8 +7,7 @@ class MarksController < ApplicationController
   end
 
   # GET /marks/1 or /marks/1.json
-  def show
-  end
+  def show; end
 
   # GET /marks/new
   def new
@@ -16,8 +15,7 @@ class MarksController < ApplicationController
   end
 
   # GET /marks/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /marks or /marks.json
   def create
@@ -58,13 +56,14 @@ class MarksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_mark
-      @mark = Mark.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def mark_params
-      params.require(:mark).permit(:student_id, :task_id, :date, :mark)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_mark
+    @mark = Mark.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def mark_params
+    params.require(:mark).permit(:student_id, :task_id, :date, :mark)
+  end
 end

@@ -1,13 +1,13 @@
 # lib/tasks/parse_links.rake
 
-require 'selenium-webdriver'
-require 'csv'
-require 'nokogiri'
+require "selenium-webdriver"
+require "csv"
+require "nokogiri"
 
 namespace :parse do
   desc "Parse links and save data to CSV and database"
-  task :links => :environment do
-    main_link = 'https://www.upwork.com/resources/top-sites-for-online-education-and-learning'
+  task links: :environment do
+    main_link = "https://www.upwork.com/resources/top-sites-for-online-education-and-learning"
     write_data = []
 
     driver = Selenium::WebDriver.for :chrome
@@ -21,13 +21,13 @@ namespace :parse do
 
       element_with_id = doc.css("#{link_text_id}")
 
-      image_element = element_with_id.css('img').first
+      image_element = element_with_id.css("img").first
 
-      image_src = image_element ? image_element['src'] : nil
+      image_src = image_element ? image_element["src"] : nil
 
-      text_content = element_with_id.css('p').text.strip
+      text_content = element_with_id.css("p").text.strip
 
-      Link.create(name: link_text, image_src: image_src, text_content: text_content)
+      Link.create(name: link_text, image_src:, text_content:)
     end
 
     driver.quit

@@ -1,5 +1,5 @@
 class StudentResponsesController < ApplicationController
-  before_action :set_student_response, only: [:show, :edit, :update, :destroy]
+  before_action :set_student_response, only: %i[show edit update destroy]
 
   def index
     @student_responses = StudentResponse.all
@@ -20,7 +20,7 @@ class StudentResponsesController < ApplicationController
     @student_response.task = Task.find_by(id: student_response_params[:task_id])
 
     if @student_response.save
-      redirect_to @student_response, notice: 'Student response was successfully created.'
+      redirect_to @student_response, notice: "Student response was successfully created."
     else
       render :new
     end
@@ -33,19 +33,17 @@ class StudentResponsesController < ApplicationController
     @mark.task_id = @student_response.task_id
     @mark.date = Date.today
 
-    if @mark.save
-      @student_response.update(mark_id: @mark.id)
-      redirect_to task_path(@student_response.task), notice: 'Student response was successfully evaluated.'
-    end
+    return unless @mark.save
+
+    @student_response.update(mark_id: @mark.id)
+    redirect_to task_path(@student_response.task), notice: "Student response was successfully evaluated."
   end
 
-
-  def edit
-  end
+  def edit; end
 
   def update
     if @student_response.update(student_response_params)
-      redirect_to @student_response, notice: 'Student response was successfully updated.'
+      redirect_to @student_response, notice: "Student response was successfully updated."
     else
       render :edit
     end
@@ -53,11 +51,12 @@ class StudentResponsesController < ApplicationController
 
   def destroy
     @student_response.destroy
-    redirect_to task_path(@student_response.task), notice: 'Student response was successfully destroyed.'
+    redirect_to task_path(@student_response.task), notice: "Student response was successfully destroyed."
   end
 
 
   private
+
   def set_student_response
     @student_response = StudentResponse.find(params[:id])
   end
