@@ -19,7 +19,6 @@ class ChatroomChannel < ApplicationCable::Channel
     json_data = JSON.parse(data["data"])
     content = json_data["content"]
     user_type = json_data["user_type"]
-    puts data
     if user_type == "Student"
       Message.create(content:, recipient_type: "Student", recipient_id: @user.id)
       ActionCable.server.broadcast("chat_room", data["data"])
