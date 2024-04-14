@@ -1,6 +1,11 @@
 <div class="d-flex flex-column align-items-center">
-  <h1>Hello rails</h1>
-  <p> Yana, Vladislav and Oleksandr</p>
+  <%= link_to "English", url_for(locale: :en) %>
+  <%= link_to "Ukrainian", url_for(locale: :ua) %>
+  <% if student_signed_in? || teacher_signed_in? %>
+    <%= t("hello_user") %>
+  <% else %>
+    <%= t("hello") %>
+  <% end %>
 
     <h2> Teachers </h2>
     <table class="table table-striped">

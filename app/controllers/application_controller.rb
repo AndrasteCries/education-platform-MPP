@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :find_user_name
+  before_action :set_locale
   def welcome
     @links = Link.all
     @teachers = Teacher.all
@@ -24,7 +25,9 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
   def find_user_name(type, id)
     if type == "Student"
       Student.find(id).middle_name
