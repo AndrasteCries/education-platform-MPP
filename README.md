@@ -15,7 +15,7 @@ It is an application in which you can see your classes you have, see your grades
 ## Diagrams
 
 ### Database ER-diagram
-![DB ER-diagram](https://github.com/AndrasteCries/education-platform-MPP/blob/docs/ER_diagramm_v2.png)
+![DB ER-diagram](https://github.com/AndrasteCries/education-platform-MPP/blob/main/docs/ER_diagramm_v2.png)
 
 ## Scripts
 
