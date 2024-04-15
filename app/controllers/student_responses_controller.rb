@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StudentResponsesController < ApplicationController
   before_action :set_student_response, only: %i[show edit update destroy]
 
@@ -28,15 +30,11 @@ class StudentResponsesController < ApplicationController
 
   def evaluate
     @student_response = StudentResponse.find(params[:id])
-    @mark = Mark.new(mark: params[:student_response][:mark])
-    @mark.student_id = @student_response.student_id
-    @mark.task_id = @student_response.task_id
-    @mark.date = Date.today
+    @mark = build_mark
 
-    return unless @mark.save
+    return unless save_mark_and_update_response
 
-    @student_response.update(mark_id: @mark.id)
-    redirect_to task_path(@student_response.task), notice: "Student response was successfully evaluated."
+    redirect_to_task_with_notice
   end
 
   def edit; end
@@ -56,6 +54,28 @@ class StudentResponsesController < ApplicationController
 
 
   private
+
+  def build_mark
+    Mark.new(
+      mark: params[:student_response][:mark],
+      student_id: @student_response.student_id,
+      task_id: @student_response.task_id,
+      date: Date.today
+    )
+  end
+
+  def save_mark_and_update_response
+    if @mark.save
+      @student_response.update(mark_id: @mark.id)
+    else
+      flash[:alert] = "Failed to save mark."
+      false
+    end
+  end
+
+  def redirect_to_task_with_notice
+    redirect_to task_path(@student_response.task), notice: "Student response was successfully evaluated."
+  end
 
   def set_student_response
     @student_response = StudentResponse.find(params[:id])

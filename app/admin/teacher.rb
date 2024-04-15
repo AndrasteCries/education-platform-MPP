@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Teacher do
   permit_params :first_name, :last_name, :middle_name, :email
 
@@ -13,5 +15,4 @@ ActiveAdmin.register Teacher do
 
   # filter :teacher_id
   # filter :hours
-
 end

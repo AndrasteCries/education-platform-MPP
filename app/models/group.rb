@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group < ApplicationRecord
   has_and_belongs_to_many :students, join_table: "groups_students"
   has_and_belongs_to_many :subjects

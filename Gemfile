@@ -1,47 +1,49 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 ruby "3.2.2"
 
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
-gem "sprockets-rails"
+gem "sprockets-rails", "~> 3.0.4"
 
 gem "pg", "~> 1.1"
 
 gem "puma", ">= 5.0"
 
-gem "importmap-rails"
+gem "importmap-rails", "~> 2.0 1"
 
-gem "turbo-rails"
+gem "turbo-rails", "~> 2.0.5"
 
-gem "stimulus-rails"
+gem "stimulus-rails", "~> 1.3.3"
 
-gem "jbuilder"
+gem "jbuilder", "~> 2.11.5"
 
-gem "tzinfo-data", platforms: %i[windows jruby]
+gem "tzinfo-data", "~> 1.2024.1", platforms: %i[windows jruby]
 
-gem "bootsnap", require: false
+gem "bootsnap", "~> 1.18.3", require: false
 
 gem "bootstrap", "~> 5.3.2"
-gem "jquery-rails"
-gem "sassc-rails"
+gem "jquery-rails", "~> 4.6.0"
+gem "sassc-rails", "~> 1.3"
 
-gem "devise"
+gem "devise", "~> 4.2.0"
 
-gem "rubocop"
-gem 'activeadmin'
+gem "activeadmin", "~> 4.0.0.beta5"
+gem "rubocop", "~> 1.62.1"
 
-gem "letter_opener"
+gem "letter_opener", "~> 1.8.1"
 
 group :development, :test do
-  gem "debug", platforms: %i[mri windows]
+  gem "debug", "~> 1.9.2", platforms: %i[mri windows]
 end
 
 group :development do
-  gem "web-console"
+  gem "web-console", "~> 4.2.1"
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem "capybara", "~> 3.40.0"
+  gem "selenium-webdriver", "~> 4.19.0"
 end

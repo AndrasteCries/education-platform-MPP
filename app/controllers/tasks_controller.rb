@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
@@ -22,16 +24,10 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
-    @task.lesson = Lesson.find_by(id: task_params[:lesson_id])
+    @task = build_task
+
     respond_to do |format|
-      if @task.save
-        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+      redirect_with_notice(format) if save_task_and_respond(format)
     end
   end
 
@@ -59,6 +55,28 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def build_task
+    task = Task.new(task_params)
+    task.lesson = Lesson.find_by(id: task_params[:lesson_id])
+    task
+  end
+
+  def save_task_and_respond(format)
+    if @task.save
+      format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+      format.json { render :show, status: :created, location: @task }
+      true
+    else
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @task.errors, status: :unprocessable_entity }
+      false
+    end
+  end
+
+  def redirect_with_notice(format)
+    format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task

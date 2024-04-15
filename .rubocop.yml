@@ -1,7 +1,7 @@
 AllCops:
   Exclude:
     - bin/**/*
-    - db/schema.rb
+    - db/**/*
     - .gemspec/**/*
     - .bundle/**/*
     - vendor/**/*
@@ -10,7 +10,10 @@ AllCops:
 
 # Commonly used screens these days easily fit more than 80 characters.
 Layout/LineLength:
-  Max: 120
+  Max: 140
+
+Metrics/BlockLength:
+  Max: 40
 
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class

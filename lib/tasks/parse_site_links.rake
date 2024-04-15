@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/tasks/parse_links.rake
 
 require "selenium-webdriver"
@@ -19,7 +21,7 @@ namespace :parse do
       link_text = element.text.strip
       link_text_id = "##{i + 1}-#{element.text.strip.downcase.gsub(' ', '-')}"
 
-      element_with_id = doc.css("#{link_text_id}")
+      element_with_id = doc.css(link_text_id.to_s)
 
       image_element = element_with_id.css("img").first
 

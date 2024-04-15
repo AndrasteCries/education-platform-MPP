@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rake"
 
 describe "rake task: parse:links" do

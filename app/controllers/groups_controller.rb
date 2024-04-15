@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[show edit update destroy]
 
@@ -91,11 +93,20 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     student = Student.find(params[:group][:captain_id])
 
-    current_captain = @group.group_students.find_by(group_id: @group.id, captain: true)
-    if current_captain.present?
-      GroupStudent.where(group_id: @group.id, student_id: current_captain.student_id).update_all(captain: false)
-    end
+    revoke_current_captain
+    assign_new_captain(student)
+  end
 
+  private
+
+  def revoke_current_captain
+    current_captain = @group.group_students.find_by(captain: true)
+    return unless current_captain
+
+    GroupStudent.where(group_id: @group.id, student_id: current_captain.student_id).update_all(captain: false)
+  end
+
+  def assign_new_captain(student)
     captain_relation = @group.group_students.find_by(student_id: student.id)
     if captain_relation
       GroupStudent.where(group_id: @group.id, student_id: student.id).update_all(captain: true)
@@ -104,8 +115,6 @@ class GroupsController < ApplicationController
       redirect_to @group, alert: "#{student.full_name} is not a member of this group."
     end
   end
-
-  private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_group
