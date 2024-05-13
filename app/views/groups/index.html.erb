@@ -1,6 +1,6 @@
 <div class="d-flex flex-column align-items-center">
   <p style="color: green"><%= notice %></p>
-  <h1>Groups</h1>
+  <h1><%= t("groups") %></h1>
   <div id="groups" class="row row-cols-1 row-cols-md-3 g-1">
     <% if current_student %>
       <% current_student.groups.each do |group| %>
@@ -9,7 +9,7 @@
             <div class="card-body">
               <%= render group %>
               <p>
-                <%= link_to "Show this group", group, class: "btn btn-primary" %>
+                <%= link_to "#{t("common.show")} #{t("group")}" , group, class: "btn btn-primary" %>
               </p>
             </div>
           </div>
@@ -22,7 +22,7 @@
             <div class="card-body">
               <%= render group %>
               <p>
-                <%= link_to "Show this group", group, class: "btn btn-primary" %>
+                <%= link_to "#{t("common.show")} #{t("group")}", group, class: "btn btn-primary" %>
               </p>
             </div>
           </div>
@@ -31,6 +31,6 @@
     <% end %>
   </div>
   <% if teacher_signed_in? %>
-    <%= link_to "New group", new_group_path, class: "btn btn-secondary" %>
+    <%= link_to "#{t("common.new")} #{t("group")}", new_group_path, class: "btn btn-secondary" %>
   <% end %>
 </div>

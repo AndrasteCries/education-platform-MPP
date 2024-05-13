@@ -3,8 +3,8 @@
 <%= render @teacher %>
 
 <div>
-  <%= link_to "Edit this teacher", edit_teacher_path(@teacher) %> |
-  <%= link_to "Back to teachers", teachers_path %>
-
-  <%= button_to "Destroy this teacher", @teacher, method: :delete %>
+  <% if current_teacher.id == @teacher.id %>
+    <%= link_to t("common.edit"), edit_teacher_path(@teacher), class: "btn btn-primary m-2 rounded" %>
+  <% end %>
+  <%= button_to  "#{t("common.destroy")} #{t("common.this")} #{t("teacher")}", @teacher, class: "btn btn-danger m-2 rounded", method: :delete %>
 </div>
