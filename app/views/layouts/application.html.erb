@@ -29,16 +29,16 @@
             </li>
           <% else %>
             <li class="nav-item">
-              <%= link_to 'My groups', groups_path, class: 'nav-link text-light' %>
+              <%= link_to  t("my_groups"), groups_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'My subjects', subjects_path, class: 'nav-link text-light' %>
+              <%= link_to  t("my_subjects"), subjects_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'Schedule', lessons_path, class: 'nav-link text-light' %>
+              <%= link_to t("schedule"), lessons_path, class: 'nav-link text-light' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'Chatroom', '/chat_room', class: 'nav-link text-light' %>
+              <%= link_to  t("chatroom"), '/chat_room', class: 'nav-link text-light' %>
             </li>
           <% end %>
         </ul>

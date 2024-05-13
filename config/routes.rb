@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root "application#welcome"
-
+  get "chat_room/", to: "application#chat"
   scope "/:locale" do
     devise_for :students, path: "students", controllers: {sessions: "students/sessions",
                                                           registrations: "students/registrations"}
     devise_for :teachers, path: "teachers", controllers: {sessions: "teachers/sessions",
                                                           registrations: "teachers/registrations"}
-    get "chat_room/", to: "application#chat"
+
     resources :subject_teachers
     resources :groups do
       member do
