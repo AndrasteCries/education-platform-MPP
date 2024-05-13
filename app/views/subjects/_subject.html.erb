@@ -1,18 +1,18 @@
 <p>
-  <strong class="card-text">Name:</strong>
+  <strong class="card-text"><%= t("name") %>:</strong>
   <%= subject.title %>
 </p>
 <p>
-  <strong class="card-text">Teacher:</strong>
+  <strong class="card-text"><%= t("group") %>:</strong>
   <%= subject.teacher.first_initials %>
 </p>
 <p>
-  <strong class="card-text">Groups:</strong>
+  <strong class="card-text"><%= t("teacher") %>:</strong>
   <% subject.groups.each do |group| %>
     <%= group.name %><br>
   <% end %>
 </p>
 <p>
-  <strong class="card-text">Hours count:</strong>
+  <strong class="card-text"><%= t("hours_count") %>:</strong>
   <%= subject.hours %>
 </p>

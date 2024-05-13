@@ -1,18 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Schedule</h1>
+<h1><%= t("schedule") %></h1>
 
 <table class="table table-bordered">
   <thead>
   <tr>
-    <th>Time</th>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-    <th>Saturday</th>
-    <th>Sunday</th>
+    <th><%= t("time") %></th>
+    <th><%= t("schedule_legend.monday") %></th>
+    <th><%= t("schedule_legend.tuesday") %></th>
+    <th><%= t("schedule_legend.wednesday") %></th>
+    <th><%= t("schedule_legend.thursday") %></th>
+    <th><%= t("schedule_legend.friday") %></th>
+    <th><%= t("schedule_legend.saturday") %></th>
+    <th><%= t("schedule_legend.sunday") %></th>
   </tr>
   </thead>
   <tbody>
@@ -42,10 +42,9 @@
 </table>
 
 <div class="legend">
-  <h3>Legend:</h3>
   <ul>
-    <li><div class="legend-color bg-info">Lecture</div> </li>
-    <li><div class="legend-color bg-warning">Seminar</div> </li>
-    <li><div class="legend-color bg-success">Practical</div> </li>
+    <li><div class="legend-color bg-info"><%= t("schedule_legend.time_legend.lecture")%></div> </li>
+    <li><div class="legend-color bg-warning"><%= t("schedule_legend.time_legend.seminar")%></div> </li>
+    <li><div class="legend-color bg-success"><%= t("schedule_legend.time_legend.practical")%></div> </li>
   </ul>
 </div>

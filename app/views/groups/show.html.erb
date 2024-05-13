@@ -8,7 +8,7 @@
       <strong class="card-text">Captain:</strong>
       <%= @group.captain ? @group.captain.full_name : "None" %>
     </p>
-    <h2>Students:</h2>
+    <h2><%= t("students") %>:</h2>
     <ul>
       <% @group.students.each do |student| %>
         <li><%= student.first_name %>  <%= student.middle_name %> <%= student.last_name %></li>
@@ -20,11 +20,11 @@
 
   <% if teacher_signed_in? %>
     <div class="btn-group mt-2" role="group" aria-label="Group actions">
-      <%= link_to "Edit this group", edit_group_path(@group), class: "btn btn-primary m-2 rounded" %>
-      <%= link_to "Back to groups", groups_path, class: "btn btn-secondary m-2 rounded" %>
-      <%= link_to "Add student", add_students_group_path(@group), class: "btn btn-secondary m-2 rounded" %>
-      <%= link_to "Remove student", remove_students_group_path(@group), class: "btn btn-secondary m-2 rounded" %>
-      <%= button_to "Destroy this group", @group, method: :delete, class: "btn btn-danger m-2 rounded" %>
+      <%= link_to t("common.edit"), edit_group_path(@group), class: "btn btn-primary m-2 rounded" %>
+      <%= link_to "#{t('common.back')} #{t('common.to')} #{t("groups")}", groups_path, class: "btn btn-secondary m-2 rounded" %>
+      <%= link_to "#{t('common.add')} #{t('student')}", add_students_group_path(@group), class: "btn btn-secondary m-2 rounded" %>
+      <%= link_to "#{t('common.remove')} #{t('student')}", remove_students_group_path(@group), class: "btn btn-secondary m-2 rounded" %>
+      <%= button_to t('common.destroy'), @group, method: :delete, class: "btn btn-danger m-2 rounded" %>
     </div>
   <% end %>
 

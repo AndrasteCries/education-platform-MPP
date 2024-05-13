@@ -1,13 +1,5 @@
 <div class="d-flex flex-column align-items-center">
-  <%= link_to "English", url_for(locale: :en) %>
-  <%= link_to "Ukrainian", url_for(locale: :ua) %>
-  <% if student_signed_in? || teacher_signed_in? %>
-    <%= t("hello_user") %>
-  <% else %>
-    <%= t("hello") %>
-  <% end %>
-
-    <h2> Teachers </h2>
+    <h2> <%= t("teachers") %> </h2>
     <table class="table table-striped">
       <thead>
       <tr>
@@ -25,7 +17,7 @@
       </tbody>
     </table>
 
-    <h2> Students </h2>
+    <h2>  <%= t("students") %>  </h2>
     <table class="table table-striped">
       <thead>
       <tr>

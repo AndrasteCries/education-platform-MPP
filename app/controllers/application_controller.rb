@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
   helper_method :find_user_name
   before_action :set_locale
+  before_action :redirect_to_locale
   def welcome
     @links = Link.all
     @teachers = Teacher.all
     @students = Student.all
+
+    @def_local = I18n.locale
     render "pages/main"
   end
 
@@ -25,8 +28,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def redirect_to_locale
+    if request.path == "/" && !params[:locale].present?
+      redirect_to root_path(locale: "en")
+    end
+  end
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
+  end
+  def default_url_options
+    {locale: I18n.locale}
   end
   def find_user_name(type, id)
     if type == "Student"
