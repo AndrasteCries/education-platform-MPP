@@ -1,7 +1,10 @@
 <p style="color: green"><%= notice %></p>
-
+<% if student_signed_in? || teacher_signed_in? %>
+  <%= t("hello_user") %>
+<% else %>
+  <%= t("hello") %>
+<% end %>
 <h1>Students</h1>
-
 <div id="students">
   <h2>Students</h2>
   <table class="table table-striped">

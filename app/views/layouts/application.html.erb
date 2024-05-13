@@ -12,58 +12,70 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-dark">
-      <div class="container-fluid text-light">
-        <a class="navbar-brand text-light" href="#">OurNavBar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse">
-
+  <nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid text-light">
+      <a class="navbar-brand text-light" href="#">OurNavBar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <%= link_to t("home"), root_path, class: 'nav-link text-light' %>
+          </li>
+          <% if !teacher_signed_in? && !student_signed_in? %>
+            <li class="nav-item">
+              <%= link_to t("groups"), groups_path, class: 'nav-link text-light' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'My groups', groups_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'My subjects', subjects_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Schedule', lessons_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Chatroom', '/chat_room', class: 'nav-link text-light' %>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item mx-3">
+            <%= link_to t("eng"), url_for(locale: "en"), class: 'nav-link text-light' %>
+          </li>
+          <li class="nav-item mx-3">
+            <%= link_to t("ukr"), url_for(locale: "ua"), class: 'nav-link text-light' %>
+          </li>
+        </ul>
+        <% if teacher_signed_in? || student_signed_in? %>
+          <% exit_path = teacher_signed_in? ? destroy_teacher_session_path : destroy_student_session_path %>
+          <% profile_path = teacher_signed_in? ? teacher_path(current_teacher) : student_path(current_student)  %>
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <%= link_to 'Home', root_path, class: 'nav-link text-light' %>
+            <li class="nav-item mx-3">
+              <%= link_to t("profile"), profile_path, class: 'nav-link text-light' %>
             </li>
-            <% if !teacher_signed_in? && !student_signed_in? %>
-            <li class="nav-item">
-              <%= link_to 'Groups', groups_path, class: 'nav-link text-light' %>
+            <li class="nav-item mx-3">
+              <%= button_to t("logout"), exit_path, method: :delete, class: 'nav-link text-light' %>
             </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to 'My groups', groups_path, class: 'nav-link text-light' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'My subjects', subjects_path, class: 'nav-link text-light' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Schedule', lessons_path, class: 'nav-link text-light' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Chatroom', '/chat_room', class: 'nav-link text-light' %>
-              </li>
-            <% end %>
           </ul>
-        </div>
+        <% else %>
+          <ul class="navbar-nav">
+            <li class="nav-item mx-3">
+              <%= link_to t("sign_in"), "#", style: "white-space: nowrap;", class: "nav-link text-light", "data-bs-toggle": "modal", "data-bs-target": "#sign_in_modal" %>
+            </li>
+            <li class="nav-item mx-3">
+              <%= link_to t("sign_up"), "#", style: "white-space: nowrap;", class: "nav-link text-light", "data-bs-toggle": "modal", "data-bs-target": "#sign_up_modal" %>
+            </li>
+          </ul>
+        <% end %>
       </div>
-      <% if teacher_signed_in? || student_signed_in? %>
-        <% exit_path = teacher_signed_in? ? destroy_teacher_session_path : destroy_student_session_path %>
-        <% profile_path = teacher_signed_in? ? teacher_path(current_teacher) : student_path(current_student)  %>
-        <li class="nav-item mx-3">
-          <%= link_to "Profile", profile_path, class: 'nav-link text-light' %>
-        </li>
-        <li class="nav-item mx-3">
-          <%= button_to "Exit", exit_path, method: :delete, class: 'nav-link text-light' %>
-        </li>
-      <% else %>
-        <li class="nav-item mx-3">
-          <%= link_to "Sign up", "#", style: "white-space: nowrap;", class: "nav-link text-light", "data-bs-toggle": "modal", "data-bs-target": "#sign_up_modal" %>
-        </li>
-        <li class="nav-item mx-3">
-          <%= link_to "Sign in", "#", style: "white-space: nowrap;", class: "nav-link text-light", "data-bs-toggle": "modal", "data-bs-target": "#sign_in_modal" %>
-        </li>
-      <% end %>
-    </nav>
-    <div class="modal fade" id="sign_up_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    </div>
+  </nav>
+
+  <div class="modal fade" id="sign_up_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">

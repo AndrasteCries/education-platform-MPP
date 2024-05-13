@@ -1,6 +1,5 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show edit update destroy]
-
   # GET /students or /students.json
   def index
     @students = Student.all
@@ -65,8 +64,6 @@ class StudentsController < ApplicationController
   def set_student
     @student = Student.find(params[:id])
   end
-
-  # Only allow a list of trusted parameters through.
   def student_params
     params.require(:student).permit(:first_name, :middle_name, :last_name, :phone_number, :email)
   end
