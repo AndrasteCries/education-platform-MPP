@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class SubjectsControllerTest < ActionDispatch::IntegrationTest
@@ -20,16 +18,8 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
   test "should create subject" do
     assert_difference("Subject.count") do
       post subjects_url,
-           params: {
-             subject: {
-               description: @subject.description,
-               difficulty_level: @subject.difficulty_level,
-               hours: @subject.hours,
-               lessons_id: @subject.lessons_id,
-               subject_id: @subject.subject_id,
-               title: @subject.title
-             }
-           }
+           params: {subject: {description: @subject.description, difficulty_level: @subject.difficulty_level,
+                              hours: @subject.hours, lessons_id: @subject.lessons_id, subject_id: @subject.subject_id, title: @subject.title}}
     end
 
     assert_redirected_to subject_url(Subject.last)
@@ -48,8 +38,7 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
   test "should update subject" do
     patch subject_url(@subject),
           params: {subject: {description: @subject.description, difficulty_level: @subject.difficulty_level,
-                             hours: @subject.hours, lessons_id: @subject.lessons_id,
-                             subject_id: @subject.subject_id, title: @subject.title}}
+                             hours: @subject.hours, lessons_id: @subject.lessons_id, subject_id: @subject.subject_id, title: @subject.title}}
     assert_redirected_to subject_url(@subject)
   end
 

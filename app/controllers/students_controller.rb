@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[show edit update destroy]
 
@@ -58,7 +56,7 @@ class StudentsController < ApplicationController
   end
 
   def current_student
-    current_student || Student.find_by(id: session[:student_id]) if session[:student_id]
+    current_student ||= Student.find_by(id: session[:student_id]) if session[:student_id]
   end
 
   private

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MarksController < ApplicationController
   before_action :set_mark, only: %i[show edit update destroy]
 

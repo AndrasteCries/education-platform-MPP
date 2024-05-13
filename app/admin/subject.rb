@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register Subject do
   permit_params :teacher_id, :title, :hours, :desctiption
 
@@ -15,4 +13,5 @@ ActiveAdmin.register Subject do
 
   filter :teacher_id
   filter :hours
+
 end

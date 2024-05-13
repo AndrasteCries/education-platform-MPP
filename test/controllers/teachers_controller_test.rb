@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
 class TeachersControllerTest < ActionDispatch::IntegrationTest
@@ -21,8 +19,7 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Teacher.count") do
       post teachers_url,
            params: {teacher: {degree: @teacher.degree, email: @teacher.email, first_name: @teacher.first_name,
-                              last_name: @teacher.last_name, middle_name: @teacher.middle_name,
-                              phone_number: @teacher.phone_number, teacher_id: @teacher.teacher_id}}
+                              last_name: @teacher.last_name, middle_name: @teacher.middle_name, phone_number: @teacher.phone_number, teacher_id: @teacher.teacher_id}}
     end
 
     assert_redirected_to teacher_url(Teacher.last)
@@ -41,8 +38,7 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
   test "should update teacher" do
     patch teacher_url(@teacher),
           params: {teacher: {degree: @teacher.degree, email: @teacher.email, first_name: @teacher.first_name,
-                             last_name: @teacher.last_name, middle_name: @teacher.middle_name,
-                             phone_number: @teacher.phone_number, teacher_id: @teacher.teacher_id}}
+                             last_name: @teacher.last_name, middle_name: @teacher.middle_name, phone_number: @teacher.phone_number, teacher_id: @teacher.teacher_id}}
     assert_redirected_to teacher_url(@teacher)
   end
 

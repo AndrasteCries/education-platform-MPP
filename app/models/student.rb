@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Student < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

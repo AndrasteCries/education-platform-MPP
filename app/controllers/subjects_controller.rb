@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SubjectsController < ApplicationController
   before_action :set_subject, only: %i[show edit update destroy]
 

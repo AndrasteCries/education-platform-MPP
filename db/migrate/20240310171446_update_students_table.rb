@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # db/migrate/20220310123456_update_students_table.rb
 
 class UpdateStudentsTable < ActiveRecord::Migration[6.0]

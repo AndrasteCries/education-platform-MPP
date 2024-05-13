@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Subjecttablerefator < ActiveRecord::Migration[7.1]
   def change
     create_join_table :groups, :subjects do |t|
