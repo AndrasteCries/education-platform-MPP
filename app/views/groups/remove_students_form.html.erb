@@ -18,7 +18,7 @@
     <%= form_with(model: @group, url: remove_students_group_path(@group), method: :post, class: "student-form") do |f| %>
       <div class="row g-3">
         <div class="col-md-6">
-          <%= text_field_tag :search, nil, placeholder: "Search students", class: "form-control" %>
+          <%= text_field_tag :search, nil, placeholder: "Search students", class: "form-control", id: "searchInput" %>
         </div>
       </div>
       <div class="row g-3 mt-3">
@@ -47,7 +47,7 @@
 <script type="text/javascript" charset="utf-8">
 
     document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.querySelector('.search-input');
+        const searchInput = document.querySelector('#searchInput');
         const studentList = document.querySelector('.student-list');
         searchInput.addEventListener('input', function() {
             const searchValue = this.value.toLowerCase();
@@ -63,4 +63,5 @@
             });
         });
     });
+
 </script>
