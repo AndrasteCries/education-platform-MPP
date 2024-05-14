@@ -3,30 +3,8 @@ class LessonsController < ApplicationController
 
   # GET /lessons or /lessons.json
   def index
-    @lessons_by_day = {}
-    @start_of_week = Date.today.beginning_of_week - 3.days
-    @end_of_week = Date.today.end_of_week + 3.days
     @time_slots = %w[8:30 10:10 12:00 13:40 15:20 17:00]
-
-    (@start_of_week..@end_of_week).each do |date|
-      if current_teacher
-        lessons_on_day = Lesson.joins(:subject).where(date:, subjects: {teacher_id: current_teacher.id})
-      elsif current_student
-        student_groups = current_student.groups
-        group_ids = student_groups.pluck(:id)
-        lessons = []
-        group_ids.each do |group_id|
-          group = Group.find(group_id)
-          puts group.subjects
-          group_ids = student_groups.pluck(:id)
-          lessons = Lesson.joins(subject: :groups).where(groups: {id: group_ids})
-        end
-        lessons_on_day = lessons.where(date:)
-      else
-        lessons_on_day = []
-      end
-      @lessons_by_day[date] = lessons_on_day unless lessons_on_day.empty?
-    end
+    @lessons_by_day = Lesson.week_lessons(current_teacher: current_teacher, current_student: current_student)
   end
 
   # GET /lessons/1 or /lessons/1.json
