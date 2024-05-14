@@ -20,32 +20,24 @@ class LessonsController < ApplicationController
 
   # POST /lessons or /lessons.json
   def create
-    @lesson = Lesson.new(lesson_params)
-    @lesson.subject = Subject.find_by(id: lesson_params[:subject_id])
-    lesson_time = Lesson.lesson_times[lesson_params[:lesson_time]]
-    date = Date.parse(lesson_params[:date])
+    lesson_service = CreateLessonService.new(lesson_params)
+    @lesson = lesson_service.call
 
-    existing_lesson = Lesson.find_by(date:, lesson_time:)
-    if existing_lesson.present?
+    if @lesson
       respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity, locals: {lesson: @lesson} }
-        format.json do
-          render json: {error: "A lesson for this time and date already exists."}, status: :unprocessable_entity
-        end
-      end
-      return
-    end
-
-    respond_to do |format|
-      if @lesson.save
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully created." }
         format.json { render :show, status: :created, location: @lesson }
-      else
+      end
+    else
+      @error_message = "A lesson for this time and date already exists."
+      respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
+        format.json { render json: { error: @error_message }, status: :unprocessable_entity }
       end
     end
   end
+
+
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update

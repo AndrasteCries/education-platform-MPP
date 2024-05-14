@@ -35,13 +35,8 @@ class GroupsController < ApplicationController
   def add_students
     @group = Group.find(params[:id])
     student_ids = params[:group][:student_ids]
-    if student_ids.present?
-      students = Student.where(id: student_ids).where.not(id: @group.student_ids)
-      @group.students << students
-      redirect_to @group, notice: "Students were successfully added to the group."
-    else
-      redirect_to @group, alert: "Please select students to add."
-    end
+    AddStudentsToGroupService.new(@group, student_ids).call
+    redirect_to @group, notice: "Students were successfully added to the group."
   end
 
   def add_students_form
@@ -89,30 +84,16 @@ class GroupsController < ApplicationController
 
   def set_captain
     @group = Group.find(params[:id])
-    student = Student.find(params[:group][:captain_id])
-
-    current_captain = @group.group_students.find_by(group_id: @group.id, captain: true)
-    if current_captain.present?
-      GroupStudent.where(group_id: @group.id, student_id: current_captain.student_id).update_all(captain: false)
-    end
-
-    captain_relation = @group.group_students.find_by(student_id: student.id)
-    if captain_relation
-      GroupStudent.where(group_id: @group.id, student_id: student.id).update_all(captain: true)
-      redirect_to @group, notice: "#{student.full_name} is now the captain of the group."
-    else
-      redirect_to @group, alert: "#{student.full_name} is not a member of this group."
-    end
+    notice_message = SetGroupCaptainService.new(@group, params[:group][:captain_id]).call
+    redirect_to @group, notice: notice_message
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_group
     @group = Group.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def group_params
     params.require(:group).permit(:group_id, :name)
   end
