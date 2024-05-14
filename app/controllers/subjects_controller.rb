@@ -3,20 +3,7 @@ class SubjectsController < ApplicationController
 
   # GET /subjects or /subjects.json
   def index
-    if current_teacher
-      @subjects = Subject.where(teacher_id: current_teacher.id)
-    elsif current_student
-      student_groups = current_student.groups
-      group_ids = student_groups.pluck(:id)
-      subjects = []
-      group_ids.each do |_group_id|
-        group_ids = student_groups.pluck(:id)
-        subjects = Subject.joins(:groups).where(groups: {id: group_ids})
-      end
-      @subjects = subjects.length <= 0 ? [] : subjects
-    else
-      @subjects = []
-    end
+    @subjects = Subject.my_subjects(current_teacher: current_teacher, current_student: current_student)
   end
 
   # GET /subjects/1 or /subjects/1.json

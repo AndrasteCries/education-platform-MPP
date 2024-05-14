@@ -10,4 +10,6 @@ class Lesson < ApplicationRecord
     "15:20" => 4,
     "17:00" => 5
   }
+
+  scope :week_lessons, LessonsWeek
 end
