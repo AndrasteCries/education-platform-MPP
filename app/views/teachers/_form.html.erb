@@ -43,8 +43,10 @@
 
   <div class="field">
     <%= form.label :currency %>
-    <%= form.select :currency, options_for_select(Money::Currency.table.keys.map(&:to_s), @user.currency) %>
+    <%= form.select :currency, options_for_select(['USD', 'EUR', 'UAH'], teacher.currency) %>
   </div>
+
+
 
   <div>
     <%= form.submit %>

@@ -1,10 +1,12 @@
 class Teacher < ApplicationRecord
+  VALID_CURRENCIES = %w[USD EUR UAH].freeze
   validate :valid_email_domain
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :currency, presence: true, inclusion: { in: Money::Currency.table.keys.map(&:to_s) }
+  validates :currency, presence: true, inclusion: { in: VALID_CURRENCIES }
+
 
   has_many :subjects
   has_many :messages, as: :recipient
@@ -13,6 +15,10 @@ class Teacher < ApplicationRecord
   end
   def self.recent(limit)
     order(created_at: :desc).limit(limit)
+  end
+
+  def currency_rates
+    CurrencyRateService.call(self)
   end
 
   private

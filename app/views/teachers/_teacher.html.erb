@@ -31,11 +31,15 @@
 
   <p>
     <strong>Preferred Currency:</strong>
-    <%= @user.currency %>
+    <%= teacher.currency %>
   </p>
   <p>
-    <strong>Currency to USD Rate:</strong>
-    <%= @user.currency_to_usd_rate %>
+    <strong>Currency Rates:</strong>
+  <ul>
+    <% teacher.currency_rates.each do |currency, rate| %>
+      <li><%= currency %>: <%= rate %></li>
+    <% end %>
+  </ul>
   </p>
 
 </div>
