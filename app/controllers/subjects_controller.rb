@@ -33,6 +33,14 @@ class SubjectsController < ApplicationController
     end
   end
 
+  def export_csv
+    @subjects = Subject.my_subjects(current_teacher: current_teacher, current_student: current_student)
+
+    respond_to do |format|
+      format.csv { send_data @subjects.to_csv, filename: "subjects-#{Date.today}.csv" }
+    end
+  end
+
   def add_group
     @subject = Subject.find(params[:id])
     group_ids = params[:subject][:group_ids]

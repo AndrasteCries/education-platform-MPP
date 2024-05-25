@@ -20,4 +20,7 @@
   <% if teacher_signed_in? %>
     <%= link_to t("common.new"), new_subject_path, class: "btn btn-secondary" %>
   <% end %>
+  <% if student_signed_in? || teacher_signed_in? %>
+    <%= link_to 'Export as CSV', export_csv_subjects_path(format: :csv), class: "btn btn-secondary" %>
+  <% end %>
 </div>

@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       member do
         get "add_group", action: "add_group_form"
       end
+      collection do
+        get "export_csv"
+      end
       post "add_group", on: :member
     end
     resources :lessons
