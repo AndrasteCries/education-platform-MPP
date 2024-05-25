@@ -26,6 +26,8 @@ gem "bootstrap", "~> 5.3.2"
 gem "jquery-rails"
 gem "sassc-rails"
 
+gem 'money-rails', '~> 1.7'
+
 gem "devise"
 
 gem "rubocop"
