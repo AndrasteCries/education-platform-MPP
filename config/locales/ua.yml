@@ -65,4 +65,13 @@ ua:
   degree: "Вчена ступінь"
   students_count: "Кількість студентів"
   hours_count: "Кількість годин"
-  time: "Час"
+  time:
+    formats:
+      long: "%d %B, %Y %H:%M"
+    date:
+      formats:
+        long: "%d %B, %Y"
+    activerecord:
+      attributes:
+        subject:
+          created_at: "Час"

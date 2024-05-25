@@ -65,8 +65,16 @@ en:
   degree: "Degree"
   students_count: "Students count"
   hours_count: "Hours count"
-  time: "Time"
-
+  time:
+    formats:
+      long: "%B %d, %Y %H:%M"
+    date:
+      formats:
+        long: "%B %d, %Y"
+  activerecord:
+    attributes:
+      subject:
+        created_at: "Time"
 
 
 

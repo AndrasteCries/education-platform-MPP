@@ -5,6 +5,14 @@ class Subject < ApplicationRecord
 
   scope :my_subjects, StudentSubjects
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[id title description hours created_at updated_at difficulty_level teacher_id lessons_id]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[groups lessons teacher]
+  end
+
   def self.recent(limit)
     order(created_at: :desc).limit(limit)
   end
