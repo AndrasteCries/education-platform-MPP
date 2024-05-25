@@ -41,6 +41,11 @@
     <%= form.text_area :degree %>
   </div>
 
+  <div class="field">
+    <%= form.label :currency %>
+    <%= form.select :currency, options_for_select(Money::Currency.table.keys.map(&:to_s), @user.currency) %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>

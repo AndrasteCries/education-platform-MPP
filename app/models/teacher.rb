@@ -4,6 +4,8 @@ class Teacher < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :currency, presence: true, inclusion: { in: Money::Currency.table.keys.map(&:to_s) }
+
   has_many :subjects
   has_many :messages, as: :recipient
   def first_initials

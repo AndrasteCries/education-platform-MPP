@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
   def redirect_to_locale
     if request.path == "/" && !params[:locale].present?
       redirect_to root_path(locale: "en")

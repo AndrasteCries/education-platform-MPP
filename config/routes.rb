@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get "chat_room/", to: "application#chat"
   scope "/:locale" do
     devise_for :students, path: "students", controllers: {sessions: "students/sessions",
-                                                          registrations: "students/registrations"}
+                                                          registrations: "students/registrations",
+                                                          passwords: "students/passwords"}
     devise_for :teachers, path: "teachers", controllers: {sessions: "teachers/sessions",
-                                                          registrations: "teachers/registrations"}
+                                                          registrations: "teachers/registrations",
+                                                          passwords: "students/passwords"}
 
     resources :subject_teachers
     resources :groups do
